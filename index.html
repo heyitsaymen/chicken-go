@@ -1,0 +1,1563 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Chicken'Go — Sidi Bel Abbès · Croustillant. Généreux. Local.</title>
+<meta name="description" content="Chicken'Go, le spécialiste du poulet croustillant à Sidi Bel Abbès. Burgers, tenders, box, frites maison. TRIG TLEGH." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Inter:wght@400;500;600;700;800;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/bold/style.css">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
+
+<style>
+:root{
+  --red:        #DA1B20;
+  --red-dark:   #A60F14;
+  --red-deep:   #5C0609;
+  --yellow:     #F4A825;
+  --yellow-lt:  #FDE7B0;
+  --cream:      #F7F2EA;
+  --paper:      #FFFDF9;
+  --ink:        #141414;
+  --graphite:   #2A2A2A;
+
+  --radius-sm: 12px;
+  --radius:    20px;
+  --radius-lg: 28px;
+
+  --shadow-soft: 0 8px 24px rgba(0,0,0,.08);
+  --shadow-red:  0 10px 28px rgba(218,27,32,.35);
+
+  --display: "Anton", "Bebas Neue", system-ui, sans-serif;
+  --sans:    "Inter", system-ui, -apple-system, sans-serif;
+  --hand:    "Caveat", cursive;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--sans);
+  color:var(--ink);
+  background:var(--cream);
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none}
+[class^="ph-"], [class*=" ph-"]{line-height:1}
+
+.container{width:min(1240px,92%);margin-inline:auto}
+
+/* ---------- HEADER ---------- */
+.header{
+  position:sticky;top:0;z-index:50;
+  background:#B8161B;
+  color:#fff;
+  border-bottom:3px solid #8C0F13;
+  transition:box-shadow .25s ease;
+}
+.header-inner{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:12px 0;gap:24px;
+}
+.brand{display:flex;align-items:center;gap:14px}
+.brand-logo{
+  width:58px;height:58px;border-radius:50%;
+  background:#fff;display:grid;place-items:center;
+  box-shadow:0 4px 14px rgba(0,0,0,.2);
+  overflow:hidden;flex-shrink:0;
+}
+.header .brand-logo img{
+  animation:logoSpin 8s linear infinite;
+  transform-origin:center;
+}
+.brand-logo img{width:100%;height:100%;object-fit:cover}
+@keyframes logoSpin{
+  from{transform:rotate(0deg)}
+  to{transform:rotate(360deg)}
+}
+.brand-name{font-family:var(--display);font-size:26px;letter-spacing:.5px;line-height:1}
+.brand-name i{color:var(--yellow);font-style:normal}
+
+.nav{display:flex;gap:30px;font-weight:600;font-size:15px}
+.nav a{position:relative;padding:6px 0;opacity:.92}
+.nav a:hover{opacity:1}
+
+.btn{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:13px 22px;border-radius:999px;
+  font-weight:700;letter-spacing:.3px;text-transform:uppercase;font-size:13px;
+  transition:transform .2s ease, box-shadow .2s ease, background .2s ease;
+}
+.btn i{font-size:18px}
+.btn-primary{background:var(--red);color:#fff;box-shadow:var(--shadow-red)}
+.btn-primary:hover{background:var(--red-dark);transform:translateY(-2px)}
+.btn-yellow{background:var(--yellow);color:var(--ink);box-shadow:0 8px 22px rgba(244,168,37,.45)}
+.btn-yellow:hover{background:#e5991f;transform:translateY(-2px)}
+.btn-dark{background:var(--ink);color:#fff}
+.btn-dark:hover{background:var(--graphite);transform:translateY(-2px)}
+.btn-ghost{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.4)}
+.btn-ghost:hover{background:#fff;color:var(--red);border-color:#fff}
+
+.burger-toggle{display:none;background:transparent;color:#fff;padding:8px;font-size:26px}
+
+/* ---------- HERO ---------- */
+.hero{
+  position:relative;
+  background:var(--red);
+  color:#fff;
+  overflow:hidden;
+  padding:80px 0;
+  min-height:100vh;
+  display:flex;align-items:center;
+}
+.hero>.container{width:100%}
+
+/* Background marquee rows */
+.hero-bg{
+  position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:1;
+  display:flex;flex-direction:column;justify-content:space-evenly;
+}
+.hero-bg-row{overflow:hidden;display:flex;align-items:center}
+.hero-bg-track{
+  display:inline-block;white-space:nowrap;flex-shrink:0;
+  font-family:var(--display);font-size:clamp(44px,5.5vw,78px);
+  color:rgba(255,255,255,.05);letter-spacing:2px;line-height:1;
+  animation:heroBgScroll 55s linear infinite;
+}
+.hero-bg-rev{animation-direction:reverse}
+@keyframes heroBgScroll{
+  from{transform:translateX(0)}
+  to{transform:translateX(-50%)}
+}
+
+.hero-grid{
+  position:relative;z-index:2;
+  display:grid;grid-template-columns:1fr 1.7fr;gap:40px;align-items:center;
+  padding:0 max(24px,4vw);
+}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:10px;
+  background:rgba(0,0,0,.25);backdrop-filter:blur(6px);
+  padding:10px 16px;border-radius:999px;font-size:12px;letter-spacing:2px;text-transform:uppercase;
+  margin-bottom:26px;border:1px solid rgba(255,255,255,.15);font-weight:600;
+}
+.hero-eyebrow i{color:var(--yellow);font-size:14px}
+
+.hero h1{
+  font-family:var(--display);font-weight:400;
+  font-size:clamp(3rem, 8vw, 7rem);
+  line-height:.92;letter-spacing:-.01em;text-transform:uppercase;
+  margin-bottom:24px;
+}
+.hero h1 .y{
+  color:var(--yellow);display:inline-block;
+  -webkit-text-stroke:2px var(--yellow);
+}
+.hero h1 .outline{
+  color:transparent;-webkit-text-stroke:2px #fff;display:inline-block;
+}
+.hero h1 .hand{
+  font-family:var(--hand);color:var(--yellow);font-size:.28em;
+  display:block;margin-top:10px;transform:rotate(-2deg);letter-spacing:1px;
+  text-transform:none;font-weight:700;
+}
+
+.hero p.lead{font-size:1.08rem;max-width:520px;opacity:.92;margin-bottom:32px;line-height:1.6}
+.hero-ctas{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:44px}
+
+.hero-meta{display:flex;gap:32px;flex-wrap:wrap;font-size:14px}
+.hero-meta div{display:flex;align-items:center;gap:10px;opacity:.95}
+.hero-meta .ico{
+  width:36px;height:36px;border-radius:10px;
+  background:rgba(255,255,255,.12);display:grid;place-items:center;
+  font-size:18px;color:var(--yellow);
+  border:1px solid rgba(255,255,255,.1);
+}
+
+/* visuel produit hero — photos réelles */
+@keyframes heroVisualIn{
+  from{opacity:0;transform:translateX(-90px)}
+  to{opacity:1;transform:none}
+}
+.hero-visual{position:relative;aspect-ratio:3/2;transform:scale(1.15);transform-origin:center;animation:heroVisualIn .9s cubic-bezier(.22,1,.36,1) .15s both}
+.hero-photo{position:absolute;inset:0;background:transparent;border:none;box-shadow:none;border-radius:0;overflow:visible}
+.hero-photo video{width:100%;height:100%;object-fit:contain;background:transparent;border:none;outline:none;display:block}
+
+.hero-badge{
+  position:absolute;top:-2%;right:-6%;width:140px;height:140px;border-radius:50%;
+  background:var(--yellow);color:var(--ink);display:grid;place-items:center;text-align:center;
+  font-family:var(--display);font-size:18px;line-height:1;letter-spacing:.5px;
+  transform:rotate(-8deg);
+  box-shadow:0 16px 34px rgba(0,0,0,.3);
+  z-index:4;animation:spinBadge 18s linear infinite;
+}
+.hero-badge span{display:block;transform:rotate(0deg)}
+.hero-badge .big{font-size:32px;margin:4px 0}
+@keyframes spinBadge{to{transform:rotate(352deg)}}
+
+.hero-chip{
+  position:absolute;background:#fff;color:var(--ink);
+  padding:12px 16px;border-radius:14px;font-size:13px;font-weight:600;
+  display:flex;align-items:center;gap:10px;box-shadow:0 12px 28px rgba(0,0,0,.25);
+  z-index:4;
+}
+.hero-chip.c1{right:-10%;top:28%;animation:float 4.5s ease-in-out infinite}
+.hero-chip .em{
+  width:34px;height:34px;border-radius:10px;background:var(--red);color:#fff;
+  display:grid;place-items:center;font-size:18px;
+}
+@keyframes float{50%{transform:translateY(-10px)}}
+
+/* ---------- SECTIONS ---------- */
+.section{padding:110px 0}
+.section-head{text-align:center;max-width:760px;margin:0 auto 64px}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  color:var(--red);font-weight:800;letter-spacing:3px;
+  font-size:12px;text-transform:uppercase;margin-bottom:14px;
+}
+.eyebrow::before,.eyebrow::after{
+  content:"";width:24px;height:2px;background:var(--red);
+}
+.section-head h2{
+  font-family:var(--display);font-weight:400;
+  font-size:clamp(2.2rem,5vw,3.8rem);line-height:1;letter-spacing:-.01em;
+  text-transform:uppercase;
+}
+.section-head h2 em{color:var(--red);font-style:normal}
+.section-head h2 .outline{color:transparent;-webkit-text-stroke:2px var(--ink);}
+.section-head p{margin-top:18px;color:#555;font-size:1.05rem;max-width:560px;margin-left:auto;margin-right:auto}
+
+/* ---------- PILIERS ---------- */
+.pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.pillar{
+  background:var(--paper);border-radius:var(--radius-lg);padding:36px 32px;
+  box-shadow:var(--shadow-soft);
+  transition:transform .25s ease, box-shadow .25s ease;
+  position:relative;overflow:hidden;
+}
+.pillar:hover{transform:translateY(-6px);box-shadow:0 20px 46px rgba(0,0,0,.1)}
+.pillar .ico-wrap{
+  width:66px;height:66px;border-radius:18px;
+  background:var(--red);
+  display:grid;place-items:center;margin-bottom:22px;
+  color:#fff;font-size:32px;
+  box-shadow:0 8px 18px rgba(218,27,32,.3);
+}
+.pillar .num{
+  position:absolute;top:20px;right:24px;
+  font-family:var(--display);font-size:3rem;color:var(--yellow);opacity:.4;line-height:1;
+}
+.pillar h3{font-family:var(--display);font-size:1.8rem;margin-bottom:10px;letter-spacing:.5px;text-transform:uppercase}
+.pillar p{color:#555;font-size:.96rem;line-height:1.6}
+
+/* ---------- STORY (preparation) ---------- */
+.story{background:var(--ink);color:#fff;position:relative;overflow:hidden}
+.story-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;position:relative;z-index:2}
+.story-text .eyebrow{color:var(--yellow)}
+.story-text .eyebrow::before,.story-text .eyebrow::after{background:var(--yellow)}
+.story-text h2{
+  font-family:var(--display);font-size:clamp(2rem,4.5vw,3.6rem);line-height:1;
+  text-transform:uppercase;margin-bottom:24px;letter-spacing:-.01em;
+}
+.story-text h2 em{color:var(--yellow);font-style:normal}
+.story-text p{opacity:.85;margin-bottom:16px;max-width:480px}
+.story-stats{display:flex;gap:32px;margin-top:32px}
+.story-stats div strong{
+  display:block;font-family:var(--display);font-size:2.6rem;color:var(--yellow);line-height:1;
+}
+.story-stats div span{font-size:13px;opacity:.75;text-transform:uppercase;letter-spacing:1px;margin-top:4px;display:block}
+
+.story-photo{
+  aspect-ratio:4/5;border-radius:var(--radius-lg);overflow:hidden;
+  box-shadow:0 30px 60px rgba(0,0,0,.5);
+  position:relative;
+}
+.story-photo img{width:100%;height:100%;object-fit:cover}
+.story-photo::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,transparent 60%,rgba(0,0,0,.4));
+}
+.story-tag{
+  position:absolute;bottom:20px;left:20px;
+  background:var(--yellow);color:var(--ink);
+  padding:10px 16px;border-radius:12px;font-weight:700;font-size:13px;
+  text-transform:uppercase;letter-spacing:1px;
+  display:flex;align-items:center;gap:8px;z-index:2;
+}
+
+/* ---------- MENU TEASER ---------- */
+.menu-section{background:var(--paper);position:relative}
+
+.menu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.card{
+  background:var(--cream);border-radius:var(--radius-lg);overflow:hidden;
+  position:relative;transition:transform .25s, box-shadow .25s;
+  display:flex;flex-direction:column;
+  box-shadow:var(--shadow-soft);
+}
+.card:hover{transform:translateY(-6px);box-shadow:0 22px 44px rgba(0,0,0,.12)}
+.card-img{
+  aspect-ratio:4/3;position:relative;overflow:hidden;background:#eee;
+}
+.card-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+.card:hover .card-img img{transform:scale(1.05)}
+.card-badge{
+  position:absolute;top:14px;left:14px;
+  background:var(--yellow);color:var(--ink);
+  padding:7px 14px;border-radius:8px;font-size:12px;font-weight:800;letter-spacing:.5px;
+  text-transform:uppercase;
+  box-shadow:0 4px 10px rgba(0,0,0,.2);
+  display:inline-flex;align-items:center;gap:6px;
+}
+.card-badge.spicy{background:var(--red);color:#fff}
+.card-price{
+  position:absolute;right:14px;bottom:-22px;
+  min-width:68px;height:68px;padding:0 10px;border-radius:50%;
+  background:var(--red);color:#fff;display:grid;place-items:center;
+  font-family:var(--display);font-size:14px;line-height:1;
+  box-shadow:var(--shadow-red);
+}
+.card-price strong{font-size:20px;display:block}
+.card-body{padding:30px 22px 22px;flex:1;display:flex;flex-direction:column}
+.card-body h4{font-family:var(--display);font-size:1.5rem;margin-bottom:6px;letter-spacing:.3px;text-transform:uppercase}
+.card-body p{color:#666;font-size:.9rem;margin-bottom:18px;flex:1;line-height:1.55}
+.card-add{
+  align-self:flex-start;font-weight:700;font-size:13px;letter-spacing:.5px;
+  color:var(--red);display:inline-flex;align-items:center;gap:6px;
+  text-transform:uppercase;transition:gap .2s;
+}
+.card-add:hover{gap:12px}
+.card-add i{font-size:14px}
+
+.menu-footer{text-align:center;margin-top:56px}
+.menu-footer a{display:inline-flex;align-items:center;gap:10px}
+
+/* ---------- GALERIE BENTO (photos réelles) ---------- */
+.bento{
+  display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:200px;gap:14px;
+}
+.bento-item{
+  border-radius:var(--radius);overflow:hidden;position:relative;
+  transition:transform .3s;
+  background:#222;
+}
+.bento-item img{width:100%;height:100%;object-fit:cover}
+.bento-item:hover{transform:scale(1.02);z-index:2}
+.bento-item .tag{
+  position:absolute;bottom:14px;left:14px;
+  background:rgba(0,0,0,.7);backdrop-filter:blur(6px);
+  color:#fff;padding:8px 14px;border-radius:10px;font-weight:700;font-size:13px;
+  display:flex;align-items:center;gap:8px;
+}
+.bento-1{grid-column:span 2;grid-row:span 2}
+.bento-2{grid-column:span 1;grid-row:span 1}
+.bento-3{grid-column:span 1;grid-row:span 2}
+.bento-4{grid-column:span 1;grid-row:span 1}
+.bento-5{grid-column:span 2;grid-row:span 1}
+
+/* ---------- LOCALISATION ---------- */
+.locate{
+  background:linear-gradient(135deg,var(--ink) 0%, var(--graphite) 100%);
+  color:#fff;border-radius:var(--radius-lg);overflow:hidden;
+  display:grid;grid-template-columns:1fr 1fr;
+}
+.locate-info{padding:64px 52px}
+.locate-info h2{font-family:var(--display);font-size:2.8rem;margin-bottom:16px;line-height:1;text-transform:uppercase}
+.locate-info h2 em{color:var(--yellow);font-style:normal}
+.locate-info p{opacity:.85;margin-bottom:32px;max-width:460px}
+.locate-list{display:grid;gap:20px;margin-bottom:32px}
+.locate-list li{list-style:none;display:flex;gap:14px;align-items:flex-start}
+.locate-list .ico{
+  width:44px;height:44px;border-radius:12px;background:var(--red);
+  display:grid;place-items:center;flex-shrink:0;font-size:20px;color:#fff;
+}
+.locate-list strong{display:block;font-size:15px;margin-bottom:2px}
+.locate-list span{font-size:14px;opacity:.75}
+.locate-map{
+  position:relative;min-height:460px;
+}
+.locate-map iframe{
+  width:100%;height:100%;border:0;display:block;
+  position:absolute;inset:0;
+}
+
+/* ---------- CTA BAND ---------- */
+.cta-band{
+  background:var(--yellow);color:var(--ink);
+  padding:32px 0;position:relative;overflow:hidden;
+}
+.cta-marquee{
+  width:100%;overflow:hidden;
+  display:flex;
+}
+.cta-marquee{
+  user-select:none;-webkit-user-select:none;pointer-events:none;
+}
+.cta-marquee-track{
+  display:flex;flex-shrink:0;white-space:nowrap;align-items:center;
+  animation:marquee 40s linear infinite;
+  font-family:var(--display);
+  font-size:clamp(1.6rem,3vw,2.4rem);
+  letter-spacing:2px;
+  color:#D89218;
+  will-change:transform;
+}
+.cta-marquee-track span{padding-right:10px;display:inline-block}
+.cta-marquee-track .dot{
+  display:inline-block;margin-right:10px;
+  flex-shrink:0;
+  font-size:1em;line-height:1;
+}
+@keyframes marquee{
+  from{transform:translateX(0)}
+  to{transform:translateX(-50%)}
+}
+.cta-band-inner{
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:24px;
+  padding:20px 0;
+  position:relative;
+}
+.cta-band h3{font-family:var(--display);font-size:clamp(1.6rem,3.4vw,2.6rem);line-height:1;text-transform:uppercase;letter-spacing:-.01em}
+
+/* ---------- FOOTER ---------- */
+.footer{background:var(--red);color:#fff;padding:72px 0 24px;text-align:center}
+.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px;justify-items:center}
+.footer h5{color:#fff;font-family:var(--display);font-size:1.15rem;margin-bottom:18px;letter-spacing:1px;text-transform:uppercase}
+.footer a{color:rgba(255,255,255,.8);display:block;padding:5px 0;font-size:14px;transition:color .2s}
+.footer a:hover{color:var(--yellow)}
+.footer p{font-size:14px;opacity:.85;max-width:320px;margin-top:14px;line-height:1.6}
+.socials{display:flex;gap:10px;margin-top:18px;justify-content:center}
+.socials a{
+  width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.15);
+  display:grid;place-items:center;padding:0;
+  transition:background .2s;font-size:18px;color:#fff;
+}
+.socials a:hover{background:rgba(255,255,255,.3)}
+.footer-bottom{
+  border-top:1px solid rgba(255,255,255,.2);padding-top:22px;
+  display:flex;justify-content:center;flex-wrap:wrap;gap:12px;
+  font-size:13px;opacity:.75;
+}
+
+/* ---------- MORPHING GRID GALLERY ---------- */
+.morph-section{
+  padding:110px 0;background:var(--paper);
+}
+.morph-wrap{
+  width:100%;max-width:1160px;margin:0 auto;
+  padding:0 32px;
+  display:grid;grid-template-columns:1fr 1.1fr;align-items:center;gap:56px;
+}
+.morph-text .eyebrow{margin-bottom:18px}
+.morph-text h2{
+  font-family:var(--display);font-weight:400;
+  font-size:clamp(2.4rem,5.2vw,4rem);line-height:1;letter-spacing:-.01em;
+  text-transform:uppercase;
+  margin-bottom:22px;
+}
+.morph-text h2 em{color:var(--red);font-style:normal}
+.morph-text p{
+  font-size:clamp(1rem,1.2vw,1.1rem);color:#555;line-height:1.65;
+  margin-bottom:28px;max-width:500px;
+}
+.morph-btn{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:14px 26px;border-radius:10px;
+  background:var(--red);color:#fff;font-weight:700;font-size:14px;
+  letter-spacing:.5px;text-transform:uppercase;
+  transition:background .2s, transform .15s;
+  box-shadow:var(--shadow-red);
+}
+.morph-btn:hover{background:var(--red-dark)}
+.morph-btn:active{transform:scale(.96)}
+.morph-btn i{font-size:16px}
+
+.morph-grid{
+  position:relative;
+  width:100%;aspect-ratio:1/1;
+}
+.morph-cell{
+  position:absolute;
+  top:0;left:0;width:0;height:0;
+  padding:4px;
+  box-sizing:border-box;
+  opacity:0;
+  transition:
+    top    .6s cubic-bezier(.22,1,.36,1),
+    left   .6s cubic-bezier(.22,1,.36,1),
+    width  .6s cubic-bezier(.22,1,.36,1),
+    height .6s cubic-bezier(.22,1,.36,1),
+    opacity .5s ease;
+  will-change:top,left,width,height;
+}
+.morph-cell.is-in{opacity:1}
+.morph-cell-inner{
+  width:100%;height:100%;
+  border-radius:14px;overflow:hidden;
+  background:#eee;
+}
+.morph-cell img{
+  width:100%;height:100%;object-fit:cover;
+  user-select:none;pointer-events:none;
+  display:block;
+}
+
+@media (max-width:860px){
+  .morph-wrap{grid-template-columns:1fr;gap:32px;padding:0 24px}
+}
+
+/* ---------- SOCIAL REELS ---------- */
+.reels-section{
+  background:var(--ink);color:#fff;
+  padding:110px 0 0;overflow:hidden;
+}
+.reels-section .section-head h2 em{color:var(--yellow)}
+.reels-section .section-head p{color:rgba(255,255,255,.72)}
+.reels-section .eyebrow{color:var(--yellow)}
+.reels-section .eyebrow::before,.reels-section .eyebrow::after{background:var(--yellow)}
+
+.reels-socials{
+  display:flex;gap:14px;justify-content:center;
+  flex-wrap:wrap;margin-top:32px;margin-bottom:56px;
+}
+.reels-socials a{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:13px 24px;border-radius:999px;
+  font-weight:700;font-size:14px;letter-spacing:.3px;
+  transition:transform .2s,opacity .2s;
+}
+.reels-socials a:hover{transform:translateY(-2px);opacity:.85}
+.reels-socials a i{font-size:18px}
+.s-ig{background:linear-gradient(135deg,#f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);color:#fff}
+.s-tt{background:#010101;color:#fff;border:1px solid rgba(255,255,255,.18)}
+.s-yt{background:#ff0000;color:#fff}
+
+.reels-track-outer{width:100%;overflow:hidden;padding-bottom:72px}
+.reels-track{
+  display:flex;gap:18px;
+  width:max-content;
+  animation:reelsScroll 60s linear infinite;
+  cursor:grab;
+  user-select:none;-webkit-user-select:none;
+}
+.reels-track.dragging{animation-play-state:paused;cursor:grabbing}
+@keyframes reelsScroll{
+  from{transform:translateX(0)}
+  to{transform:translateX(-50%)}
+}
+
+.reel-card{
+  width:200px;aspect-ratio:9/16;
+  border-radius:22px;overflow:hidden;
+  position:relative;flex-shrink:0;
+  box-shadow:0 18px 44px rgba(0,0,0,.55);
+  transition:transform .35s ease,box-shadow .35s ease;
+}
+.reel-card:hover{transform:scale(1.04);box-shadow:0 26px 60px rgba(0,0,0,.65)}
+.reel-card video{
+  width:100%;height:100%;
+  object-fit:cover;display:block;
+  pointer-events:none;
+}
+
+/* ---------- LETTER SWAP BUTTONS ---------- */
+.ls-wrap{display:inline-flex;align-items:center}
+.ls-char-pair{
+  display:inline-block;position:relative;
+  overflow:hidden;vertical-align:middle;
+}
+.ls-char-a,.ls-char-b{
+  display:inline-block;white-space:pre;
+  transition:transform .48s cubic-bezier(.22,1,.36,1);
+  transition-delay:var(--ls-delay,0s);
+}
+.ls-char-b{
+  position:absolute;top:0;left:0;
+  transform:translateY(-100%);
+}
+.ls-btn:hover .ls-char-a{transform:translateY(100%)}
+.ls-btn:hover .ls-char-b{transform:translateY(0%)}
+
+/* ---------- MOBILE NAV ---------- */
+.mobile-overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:98;
+  opacity:0;pointer-events:none;transition:opacity .35s ease;
+}
+.mobile-overlay.open{opacity:1;pointer-events:all}
+.mobile-nav{
+  position:fixed;top:0;left:0;bottom:0;width:100%;
+  background:var(--red);color:#fff;z-index:99;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  transform:translateX(-100%);transition:transform .42s cubic-bezier(.22,1,.36,1);
+  overflow:hidden;
+}
+.mobile-nav.open{transform:translateX(0)}
+.mobile-nav-links{display:flex;flex-direction:column;align-items:center;gap:24px}
+.mobile-nav-links a{
+  font-family:var(--display);font-size:clamp(3rem,14vw,5.5rem);
+  color:#fff;text-align:center;opacity:.9;
+  transition:opacity .2s,transform .2s;
+}
+.mobile-nav-links a:hover{opacity:1;transform:scale(1.04)}
+.mobile-nav-close{
+  position:absolute;top:20px;right:20px;
+  background:rgba(255,255,255,.12);border:none;color:#fff;
+  font-size:28px;cursor:pointer;
+  width:52px;height:52px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  transition:background .2s;
+}
+.mobile-nav-close:hover{background:rgba(255,255,255,.25)}
+
+/* ---------- TEXT EFFECT (scroll-triggered per word) ---------- */
+.te-word{
+  display:inline-block;
+  opacity:0;
+  transform:translateY(22px);
+  transition:opacity .55s ease,transform .55s cubic-bezier(.22,1,.36,1);
+  transition-delay:var(--te-delay,0s);
+}
+.te-ready .te-word{opacity:1;transform:none}
+
+/* ---------- SEPARATOR BANDS ---------- */
+.sep-band{padding:18px 0;overflow:hidden;user-select:none;pointer-events:none}
+.sep-yellow{background:var(--yellow)}
+.sep-red{background:var(--red)}
+.sep-track{
+  display:flex;flex-shrink:0;white-space:nowrap;align-items:center;
+  width:max-content;
+  animation:marquee 40s linear infinite;
+  font-family:var(--display);
+  font-size:clamp(1.4rem,2.5vw,2rem);
+  letter-spacing:2px;
+}
+.sep-yellow .sep-track{color:rgba(0,0,0,.35)}
+.sep-red .sep-track{color:rgba(255,255,255,.45)}
+.sep-track.sep-reverse{animation-direction:reverse}
+.sep-track span{padding-right:10px;display:inline-block}
+.sep-track .sep-dot{display:inline-block;margin-right:10px}
+
+/* ---------- RESPONSIVE ---------- */
+/* Tablette / laptop */
+@media (max-width: 1100px){
+  .section{padding:92px 0}
+  .hero-grid{gap:40px}
+  .story-grid{gap:48px}
+}
+
+/* Tablette */
+@media (max-width: 960px){
+  .reels-section{padding:72px 0 0}
+  .reel-card{width:172px;border-radius:18px}
+  .reels-track{gap:14px}
+  .reels-socials{margin-bottom:40px}
+  .hero{padding:52px 0 64px}
+  .hero-grid{grid-template-columns:1fr;gap:12px;text-align:center;padding:0 max(20px,4vw)}
+  .hero-ctas{justify-content:center}
+  .hero-text{order:2}
+  .hero-visual{order:1;max-width:420px;margin:0 auto;width:100%;transform:none}
+  .nav{display:none}
+  .burger-toggle{display:block}
+  .menu-grid{grid-template-columns:repeat(2,1fr)}
+  .pillars{grid-template-columns:1fr}
+  .bento{grid-template-columns:repeat(2,1fr)}
+  .bento-1, .bento-5{grid-column:span 2}
+  .story-grid{grid-template-columns:1fr;gap:40px}
+  .locate{grid-template-columns:1fr}
+  .locate-info{padding:40px 28px}
+  .locate-map{min-height:360px}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:28px}
+  .section{padding:72px 0}
+  .btn-ghost{display:none}
+}
+
+/* Mobile paysage / petite tablette */
+@media (max-width: 720px){
+  .header-inner{gap:12px}
+  .section{padding:60px 0}
+  .section-head{margin-bottom:44px}
+  .cta-band-inner{flex-direction:column;text-align:center;padding:14px 0}
+  .hero h1{font-size:clamp(2.4rem,10vw,5rem)}
+  .morph-wrap{padding:0 24px;gap:32px}
+}
+
+/* Mobile portrait */
+@media (max-width: 540px){
+  .menu-grid{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr}
+  .hero-meta{gap:16px;flex-wrap:wrap}
+  .hero-badge{width:96px;height:96px;font-size:12px;right:-2%}
+  .hero-badge .big{font-size:22px}
+  .hero-chip.c1{right:-2%;top:22%;padding:10px 12px;font-size:11px}
+  .hero-chip .em{width:28px;height:28px;font-size:14px}
+  .locate-info{padding:32px 22px}
+  .locate-info h2{font-size:2rem}
+  .story-text h2{font-size:2rem}
+  .story-stats{gap:20px;flex-wrap:wrap}
+  .story-stats div strong{font-size:2rem}
+  .morph-text h2{font-size:2rem}
+  .morph-wrap{grid-template-columns:1fr;gap:28px}
+}
+
+/* Petit mobile */
+@media (max-width: 420px){
+  .reels-section{padding:48px 0 0}
+  .reel-card{width:132px;border-radius:14px}
+  .reels-track{gap:12px}
+  .reels-socials{gap:10px;margin-bottom:32px}
+  .reels-socials a{padding:10px 18px;font-size:13px}
+  .container{width:min(1240px,94%)}
+  .header-inner{padding:10px 0;gap:8px}
+  .header .btn-ghost{display:none}
+  .header .btn{padding:10px 14px;font-size:11px;gap:6px}
+  .header .btn i{font-size:14px}
+  .brand{gap:10px}
+  .brand-name{font-size:18px}
+  .brand-logo{width:40px;height:40px}
+  .hero{padding:32px 0 40px}
+  .hero h1{font-size:clamp(2rem,11vw,3.2rem);line-height:.95;margin-bottom:20px}
+  .hero-eyebrow{font-size:10px;letter-spacing:1px;padding:8px 12px;margin-bottom:20px}
+  .hero-eyebrow i{font-size:12px}
+  .hero p.lead{font-size:.95rem;margin-bottom:24px}
+  .hero-ctas{flex-direction:column;align-items:stretch;gap:10px;margin-bottom:32px}
+  .hero-ctas .btn{justify-content:center}
+  .hero-meta{gap:12px;flex-direction:column;align-items:flex-start}
+  .hero-badge{width:76px;height:76px;font-size:10px;top:-3%;right:-2%}
+  .hero-badge .big{font-size:18px}
+  .hero-chip{display:none}
+  .hero-visual{max-width:320px}
+  .section{padding:48px 0}
+  .section-head{margin-bottom:32px}
+  .section-head h2{font-size:1.8rem}
+  .section-head p{font-size:.95rem;margin-top:12px}
+  .eyebrow{font-size:11px;letter-spacing:2px}
+  .pillar{padding:24px 20px}
+  .pillar .ico-wrap{width:56px;height:56px;font-size:26px;margin-bottom:16px;border-radius:14px}
+  .pillar h3{font-size:1.4rem}
+  .pillar .num{font-size:2.2rem;top:16px;right:18px}
+  .pillar p{font-size:.9rem}
+  .story-text h2{font-size:1.7rem}
+  .story-text p{font-size:.92rem}
+  .story-stats div strong{font-size:1.8rem}
+  .story-stats div span{font-size:11px}
+  .card-body{padding:24px 18px 18px}
+  .card-body h4{font-size:1.25rem}
+  .card-body p{font-size:.88rem;margin-bottom:14px}
+  .card-price{min-width:56px;height:56px;font-size:11px}
+  .card-price strong{font-size:16px}
+  .card-badge{padding:5px 10px;font-size:10px}
+  .locate-info{padding:28px 20px}
+  .locate-info h2{font-size:1.7rem}
+  .locate-info p{font-size:.92rem;margin-bottom:22px}
+  .locate-list{gap:14px;margin-bottom:24px}
+  .locate-list .ico{width:38px;height:38px;font-size:16px;border-radius:10px}
+  .locate-list strong{font-size:14px}
+  .locate-list span{font-size:13px}
+  .locate-map{min-height:260px}
+  .cta-band-inner{padding:14px 0;gap:16px}
+  .cta-band h3{font-size:1.3rem}
+  .cta-marquee-track{font-size:1.4rem;letter-spacing:1px}
+  .morph-section{padding:60px 0}
+  .morph-wrap{padding:0 16px;gap:28px}
+  .morph-text h2{font-size:1.8rem}
+  .morph-text p{font-size:.92rem;margin-bottom:20px}
+  .morph-btn{padding:12px 20px;font-size:12px}
+  .footer{padding:44px 0 20px}
+  .footer-grid{gap:24px;margin-bottom:28px}
+  .footer h5{font-size:1rem;margin-bottom:12px}
+  .footer p{font-size:13px}
+  .footer a{font-size:13px}
+  .socials a{width:38px;height:38px;font-size:16px}
+  .footer-bottom{font-size:11px;flex-direction:column;text-align:center;gap:6px}
+}
+
+/* Ultra-étroit — smartwatches, pliables, etc. */
+@media (max-width: 320px){
+  .reels-section{padding:36px 0 0}
+  .reel-card{width:108px;border-radius:12px}
+  .reels-track{gap:10px}
+  .reels-socials{gap:8px;margin-bottom:24px}
+  .reels-socials a{padding:8px 14px;font-size:11px;gap:7px}
+  .reels-socials a i{font-size:15px}
+  .container{width:min(1240px,96%)}
+  .header-inner{padding:8px 0;gap:6px}
+  .header .btn{padding:8px 10px;font-size:10px;gap:4px;border-radius:999px}
+  .header .btn i{font-size:14px}
+  .header .btn-yellow{padding:10px;font-size:0;gap:0}
+  .header .btn-yellow i{font-size:16px}
+  .brand{gap:6px;min-width:0;flex:1 1 auto;overflow:hidden}
+  .brand-name{font-size:14px;letter-spacing:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .brand-logo{width:32px;height:32px}
+  .burger-toggle{font-size:20px;padding:4px}
+  .hero{padding:24px 0 40px}
+  .hero-bg{display:none}
+  .hero h1{font-size:1.7rem;line-height:1;letter-spacing:-.02em;margin-bottom:16px}
+  .hero h1 .hand{font-size:.32em;margin-top:6px}
+  .hero-eyebrow{font-size:8px;letter-spacing:.5px;padding:6px 10px;margin-bottom:18px}
+  .hero-eyebrow i{font-size:10px}
+  .hero p.lead{font-size:.85rem;margin-bottom:18px;line-height:1.5}
+  .hero-ctas{gap:8px;margin-bottom:24px}
+  .btn{padding:10px 14px;font-size:11px;gap:6px}
+  .btn i{font-size:13px}
+  .hero-visual{max-width:210px}
+  .hero-badge{width:56px;height:56px;font-size:8px;top:-2%;right:-2%}
+  .hero-badge .big{font-size:13px;margin:2px 0}
+  .hero-meta{font-size:11px;gap:10px;flex-direction:column;align-items:flex-start}
+  .hero-meta div{gap:6px}
+  .hero-meta .ico{width:26px;height:26px;font-size:12px;border-radius:7px}
+  .section{padding:36px 0}
+  .section-head{margin-bottom:24px}
+  .section-head h2{font-size:1.35rem;letter-spacing:0}
+  .section-head p{font-size:.82rem;margin-top:8px}
+  .eyebrow{font-size:9px;letter-spacing:1px;margin-bottom:10px}
+  .eyebrow::before,.eyebrow::after{width:12px;height:1px}
+  .pillars{gap:14px}
+  .pillar{padding:18px 14px;border-radius:16px}
+  .pillar .ico-wrap{width:44px;height:44px;font-size:20px;margin-bottom:12px;border-radius:12px}
+  .pillar h3{font-size:1.1rem;margin-bottom:6px}
+  .pillar .num{font-size:1.5rem;top:10px;right:12px}
+  .pillar p{font-size:.82rem;line-height:1.5}
+  .story-text h2{font-size:1.35rem;margin-bottom:14px}
+  .story-text p{font-size:.82rem;margin-bottom:12px}
+  .story-stats{gap:14px;margin-top:20px}
+  .story-stats div strong{font-size:1.5rem}
+  .story-stats div span{font-size:10px;letter-spacing:.5px}
+  .story-photo{border-radius:18px}
+  .story-tag{font-size:10px;padding:6px 10px;bottom:10px;left:10px}
+  .menu-grid{gap:18px}
+  .card{border-radius:18px}
+  .card-body{padding:22px 14px 14px}
+  .card-body h4{font-size:1.1rem}
+  .card-body p{font-size:.8rem;margin-bottom:12px}
+  .card-add{font-size:11px}
+  .card-price{min-width:48px;height:48px;font-size:10px;right:10px;bottom:-18px}
+  .card-price strong{font-size:14px}
+  .card-badge{padding:4px 8px;font-size:9px;top:10px;left:10px}
+  .locate{border-radius:16px}
+  .locate-info{padding:22px 16px}
+  .locate-info h2{font-size:1.35rem;margin-bottom:10px}
+  .locate-info p{font-size:.82rem;margin-bottom:18px}
+  .locate-list{gap:12px;margin-bottom:20px}
+  .locate-list .ico{width:32px;height:32px;font-size:14px;border-radius:8px}
+  .locate-list strong{font-size:12px}
+  .locate-list span{font-size:11px}
+  .locate-map{min-height:200px}
+  .cta-band{padding:20px 0}
+  .cta-band-inner{padding:12px 0;gap:12px}
+  .cta-band h3{font-size:1.05rem}
+  .cta-marquee-track{font-size:1.1rem;letter-spacing:.5px}
+  .morph-section{padding:40px 0}
+  .morph-wrap{padding:0 10px;gap:20px}
+  .morph-text h2{font-size:1.35rem;margin-bottom:12px}
+  .morph-text p{font-size:.82rem;margin-bottom:16px}
+  .morph-btn{padding:10px 16px;font-size:11px}
+  .footer{padding:32px 0 16px}
+  .footer .brand-name{font-size:16px}
+  .footer-grid{gap:20px;margin-bottom:22px}
+  .footer h5{font-size:.95rem;margin-bottom:10px}
+  .footer p{font-size:12px;margin-top:10px}
+  .footer a{font-size:12px;padding:4px 0}
+  .socials{gap:8px;margin-top:14px;flex-wrap:wrap}
+  .socials a{width:32px;height:32px;font-size:14px}
+  .footer-bottom{font-size:10px;padding-top:16px;flex-direction:column;text-align:center;gap:4px}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="container header-inner">
+    <a href="index.html" class="brand">
+      <span class="brand-logo"><img src="logo.png" alt="Chicken'Go" /></span>
+      <span class="brand-name">Chicken<i>'</i>Go</span>
+    </a>
+    <nav class="nav">
+      <a href="#concept">Concept</a>
+      <a href="menu.html">Menu</a>
+      <a href="#bestsellers">Galerie</a>
+      <a href="#reseaux">Nos réseaux</a>
+    </nav>
+    <div style="display:flex;gap:10px;align-items:center">
+      <a href="#trouver" class="btn btn-ghost"><i class="ph-bold ph-phone"></i> Contact</a>
+      <a href="menu.html" class="btn btn-yellow"><i class="ph-bold ph-shopping-bag"></i> Commander</a>
+      <button class="burger-toggle" aria-label="Menu"><i class="ph-bold ph-list"></i></button>
+    </div>
+  </div>
+</header>
+
+<!-- MOBILE NAV -->
+<div class="mobile-overlay" id="mobileOverlay"></div>
+<nav class="mobile-nav" id="mobileNav" aria-label="Menu mobile">
+  <button class="mobile-nav-close" id="mobileNavClose" aria-label="Fermer"><i class="ph-bold ph-x"></i></button>
+  <div class="mobile-nav-links">
+    <a href="#concept" class="ls-btn">Concept</a>
+    <a href="menu.html" class="ls-btn">Menu</a>
+    <a href="#bestsellers" class="ls-btn">Galerie</a>
+    <a href="#reseaux" class="ls-btn">Nos réseaux</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container hero-grid">
+    <div class="hero-text">
+      <h1>
+        Poulet <span class="y">ultra</span><br>
+        <span class="outline">croustillant.</span><br>
+        Service <span class="y">express.</span>
+      </h1>
+      <div class="hero-ctas">
+        <a href="menu.html" class="btn btn-yellow"><i class="ph-bold ph-hamburger"></i> Voir le menu</a>
+        <a href="#trouver" class="btn btn-ghost"><i class="ph-bold ph-map-pin"></i> Nous trouver</a>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="hero-photo">
+        <video src="burger.webm" autoplay loop muted playsinline aria-label="Burger Chicken'Go en rotation"></video>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SÉPARATEUR hero → concept -->
+<div class="sep-band sep-yellow" aria-hidden="true">
+  <div class="sep-track">
+    <span>CHICKEN'GO</span><span class="sep-dot">•</span><span>CHICKEN'GO</span><span class="sep-dot">•</span><span>CHICKEN'GO</span><span class="sep-dot">•</span><span>CHICKEN'GO</span><span class="sep-dot">•</span><span>CHICKEN'GO</span><span class="sep-dot">•</span><span>CHICKEN'GO</span><span class="sep-dot">•</span><span>CHICKEN'GO</span><span class="sep-dot">•</span><span>CHICKEN'GO</span><span class="sep-dot">•</span><span>CHICKEN'GO</span><span class="sep-dot">•</span><span>CHICKEN'GO</span><span class="sep-dot">•</span><span>CHICKEN'GO</span><span class="sep-dot">•</span><span>CHICKEN'GO</span><span class="sep-dot">•</span><span>CHICKEN'GO</span><span class="sep-dot">•</span><span>CHICKEN'GO</span><span class="sep-dot">•</span><span>CHICKEN'GO</span><span class="sep-dot">•</span><span>CHICKEN'GO</span><span class="sep-dot">•</span><span>CHICKEN'GO</span><span class="sep-dot">•</span><span>CHICKEN'GO</span><span class="sep-dot">•</span><span>CHICKEN'GO</span><span class="sep-dot">•</span><span>CHICKEN'GO</span><span class="sep-dot">•</span><span>CHICKEN'GO</span><span class="sep-dot">•</span><span>CHICKEN'GO</span><span class="sep-dot">•</span><span>CHICKEN'GO</span><span class="sep-dot">•</span><span>CHICKEN'GO</span><span class="sep-dot">•</span>
+  </div>
+</div>
+
+<!-- CONCEPT / PILIERS -->
+<section class="section" id="concept">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Notre concept</span>
+      <h2>Le poulet, <em>rien que ça</em>,<br>mais fait <span class="outline">bien</span>.</h2>
+      <p>Panure croustillante, pain brioché doré, produits frais de Sidi Bel Abbès. Chaque box est montée à la commande.</p>
+    </div>
+    <div class="pillars">
+      <div class="pillar">
+        <span class="num">01</span>
+        <div class="ico-wrap"><i class="ph-fill ph-flame"></i></div>
+        <h3>Croustillant</h3>
+        <p>Panure maison à la semoule, double cuisson pour un "crunch" garanti à chaque bouchée.</p>
+      </div>
+      <div class="pillar">
+        <span class="num">02</span>
+        <div class="ico-wrap"><i class="ph-fill ph-hamburger"></i></div>
+        <h3>Généreux</h3>
+        <p>Des filets XXL qui débordent du pain, des frites à volonté, des sauces qu'on ose utiliser.</p>
+      </div>
+      <div class="pillar">
+        <span class="num">03</span>
+        <div class="ico-wrap"><i class="ph-fill ph-map-pin"></i></div>
+        <h3>Local</h3>
+        <p>100% préparé à Sidi Bel Abbès, avec des producteurs de la région. Soutenez le local.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STORY — photo preparation -->
+<section class="section story">
+  <div class="container">
+    <div class="story-grid">
+      <div class="story-text">
+        <span class="eyebrow">En coulisses</span>
+        <h2>Chaque burger monté <em>à la main</em>.</h2>
+        <p>Pas de pré-montage. Pas de réchauffé. À l'ouverture, on panne les filets, on toaste les pains et on prépare les sauces. Pendant le service, tout est monté à la demande, sous vos yeux.</p>
+        <p>On a fait le choix du vrai : semoule fine pour la panure, pain brioché moelleux, salade coupée le matin même. Simple, mais bien fait.</p>
+      </div>
+      <div class="story-photo">
+        <img src="image-burger-en-preparation.png" alt="Burgers préparés à la main en cuisine" />
+        <span class="story-tag"><i class="ph-bold ph-fork-knife"></i> Live kitchen</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SÉPARATEUR en coulisses → best sellers (rouge, inverse) -->
+<div class="sep-band sep-red" aria-hidden="true">
+  <div class="sep-track sep-reverse">
+    <span>CHICKEN'GO</span><span class="sep-dot">•</span><span>CHICKEN'GO</span><span class="sep-dot">•</span><span>CHICKEN'GO</span><span class="sep-dot">•</span><span>CHICKEN'GO</span><span class="sep-dot">•</span><span>CHICKEN'GO</span><span class="sep-dot">•</span><span>CHICKEN'GO</span><span class="sep-dot">•</span><span>CHICKEN'GO</span><span class="sep-dot">•</span><span>CHICKEN'GO</span><span class="sep-dot">•</span><span>CHICKEN'GO</span><span class="sep-dot">•</span><span>CHICKEN'GO</span><span class="sep-dot">•</span><span>CHICKEN'GO</span><span class="sep-dot">•</span><span>CHICKEN'GO</span><span class="sep-dot">•</span><span>CHICKEN'GO</span><span class="sep-dot">•</span><span>CHICKEN'GO</span><span class="sep-dot">•</span><span>CHICKEN'GO</span><span class="sep-dot">•</span><span>CHICKEN'GO</span><span class="sep-dot">•</span><span>CHICKEN'GO</span><span class="sep-dot">•</span><span>CHICKEN'GO</span><span class="sep-dot">•</span><span>CHICKEN'GO</span><span class="sep-dot">•</span><span>CHICKEN'GO</span><span class="sep-dot">•</span><span>CHICKEN'GO</span><span class="sep-dot">•</span><span>CHICKEN'GO</span><span class="sep-dot">•</span><span>CHICKEN'GO</span><span class="sep-dot">•</span><span>CHICKEN'GO</span><span class="sep-dot">•</span>
+  </div>
+</div>
+
+<!-- MENU TEASER -->
+<section class="section menu-section" id="bestsellers">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Les best-sellers</span>
+      <h2>Ce qui part <em>le plus vite</em>.</h2>
+      <p>Un aperçu de nos classiques. Pour le menu complet, swipe sur la page menu.</p>
+    </div>
+
+    <div class="menu-grid">
+      <article class="card">
+        <div class="card-img">
+          <img src="image-du-burger.png" alt="Chicken Burger Classic" />
+        </div>
+        <div class="card-body">
+          <h4>Chicken Burger Classic</h4>
+          <p>Poulet croustillant, salade fraîche, tomate, sauce spéciale Chicken'Go.</p>
+          <a href="menu.html" class="card-add">Voir détails <i class="ph-bold ph-arrow-right"></i></a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-img">
+          <img src="image-burger-en-preparation.png" alt="Box Tenders" />
+        </div>
+        <div class="card-body">
+          <h4>Box Tenders</h4>
+          <p>6 tenders croustillants, frites dorées maison, sauce au choix.</p>
+          <a href="menu.html" class="card-add">Voir détails <i class="ph-bold ph-arrow-right"></i></a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-img">
+          <img src="image-box-en-preparation.png" alt="Box Family" />
+        </div>
+        <div class="card-body">
+          <h4>Box Family</h4>
+          <p>Mix tenders, wings et nuggets, grandes frites et 4 sauces au choix.</p>
+          <a href="menu.html" class="card-add">Voir détails <i class="ph-bold ph-arrow-right"></i></a>
+        </div>
+      </article>
+    </div>
+
+    <div class="menu-footer">
+      <a href="menu.html" class="btn btn-primary"><i class="ph-bold ph-list-bullets"></i> Voir tout le menu</a>
+    </div>
+  </div>
+</section>
+
+<!-- SÉPARATEUR best sellers → la cuisine live (rouge, avant) -->
+<div class="sep-band sep-red" aria-hidden="true">
+  <div class="sep-track">
+    <span>CHICKEN'GO</span><span class="sep-dot">•</span><span>CHICKEN'GO</span><span class="sep-dot">•</span><span>CHICKEN'GO</span><span class="sep-dot">•</span><span>CHICKEN'GO</span><span class="sep-dot">•</span><span>CHICKEN'GO</span><span class="sep-dot">•</span><span>CHICKEN'GO</span><span class="sep-dot">•</span><span>CHICKEN'GO</span><span class="sep-dot">•</span><span>CHICKEN'GO</span><span class="sep-dot">•</span><span>CHICKEN'GO</span><span class="sep-dot">•</span><span>CHICKEN'GO</span><span class="sep-dot">•</span><span>CHICKEN'GO</span><span class="sep-dot">•</span><span>CHICKEN'GO</span><span class="sep-dot">•</span><span>CHICKEN'GO</span><span class="sep-dot">•</span><span>CHICKEN'GO</span><span class="sep-dot">•</span><span>CHICKEN'GO</span><span class="sep-dot">•</span><span>CHICKEN'GO</span><span class="sep-dot">•</span><span>CHICKEN'GO</span><span class="sep-dot">•</span><span>CHICKEN'GO</span><span class="sep-dot">•</span><span>CHICKEN'GO</span><span class="sep-dot">•</span><span>CHICKEN'GO</span><span class="sep-dot">•</span><span>CHICKEN'GO</span><span class="sep-dot">•</span><span>CHICKEN'GO</span><span class="sep-dot">•</span><span>CHICKEN'GO</span><span class="sep-dot">•</span><span>CHICKEN'GO</span><span class="sep-dot">•</span>
+  </div>
+</div>
+
+<!-- GALERIE — MORPHING GRID -->
+<section class="morph-section" id="galerie">
+  <div class="morph-wrap">
+    <div class="morph-text">
+      <span class="eyebrow">La cuisine, live</span>
+      <h2>Chaque jour, <em>nouveau</em>.</h2>
+      <p>Burgers montés à la commande, tenders dorés à la minute, box prêtes en 8 minutes. Un aperçu de la cuisine Chicken'Go qui se réorganise sous tes yeux.</p>
+      <a href="menu.html" class="morph-btn"><i class="ph-bold ph-hamburger"></i> Voir le menu</a>
+    </div>
+    <div class="morph-grid" id="morphGrid"></div>
+  </div>
+</section>
+
+<!-- SOCIAL REELS -->
+<section class="reels-section" id="reseaux">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Nos réseaux</span>
+      <h2>Suivez-nous sur <em>Instagram</em> & <em>TikTok</em></h2>
+      <p>Coulisses, nouveautés et moments de cuisine en direct. On vous régale aussi sur les réseaux.</p>
+    </div>
+    <div class="reels-socials">
+      <a href="https://www.instagram.com/chickengo.sidi_bel_abbes/" target="_blank" rel="noopener" class="s-ig">
+        <i class="ph-fill ph-instagram-logo"></i> @chickengo.sidi_bel_abbes
+      </a>
+      <a href="https://www.tiktok.com/@chickengo.dz" target="_blank" rel="noopener" class="s-tt">
+        <i class="ph-fill ph-tiktok-logo"></i> @chickengo.dz
+      </a>
+    </div>
+  </div>
+  <div class="reels-track-outer">
+    <div class="reels-track" id="reelsTrack">
+      <!-- SET 1 — 12 cartes (4 vidéos × 3 répétitions) couvre jusqu'à 2616px -->
+      <div class="reel-card"><video src="video_DXHtUA1Dfnh.mp4" autoplay muted loop playsinline></video></div>
+      <div class="reel-card"><video src="video_DWtk3TWjAkZ.mp4" autoplay muted loop playsinline></video></div>
+      <div class="reel-card"><video src="video_DU1AJl5DQ-4.mp4" autoplay muted loop playsinline></video></div>
+      <div class="reel-card"><video src="video_DUk5MbSjWJd.mp4" autoplay muted loop playsinline></video></div>
+      <div class="reel-card"><video src="video_DXHtUA1Dfnh.mp4" autoplay muted loop playsinline></video></div>
+      <div class="reel-card"><video src="video_DWtk3TWjAkZ.mp4" autoplay muted loop playsinline></video></div>
+      <div class="reel-card"><video src="video_DU1AJl5DQ-4.mp4" autoplay muted loop playsinline></video></div>
+      <div class="reel-card"><video src="video_DUk5MbSjWJd.mp4" autoplay muted loop playsinline></video></div>
+      <div class="reel-card"><video src="video_DXHtUA1Dfnh.mp4" autoplay muted loop playsinline></video></div>
+      <div class="reel-card"><video src="video_DWtk3TWjAkZ.mp4" autoplay muted loop playsinline></video></div>
+      <div class="reel-card"><video src="video_DU1AJl5DQ-4.mp4" autoplay muted loop playsinline></video></div>
+      <div class="reel-card"><video src="video_DUk5MbSjWJd.mp4" autoplay muted loop playsinline></video></div>
+      <!-- SET 2 — clone identique pour boucle seamless translateX(-50%) -->
+      <div class="reel-card"><video src="video_DXHtUA1Dfnh.mp4" autoplay muted loop playsinline></video></div>
+      <div class="reel-card"><video src="video_DWtk3TWjAkZ.mp4" autoplay muted loop playsinline></video></div>
+      <div class="reel-card"><video src="video_DU1AJl5DQ-4.mp4" autoplay muted loop playsinline></video></div>
+      <div class="reel-card"><video src="video_DUk5MbSjWJd.mp4" autoplay muted loop playsinline></video></div>
+      <div class="reel-card"><video src="video_DXHtUA1Dfnh.mp4" autoplay muted loop playsinline></video></div>
+      <div class="reel-card"><video src="video_DWtk3TWjAkZ.mp4" autoplay muted loop playsinline></video></div>
+      <div class="reel-card"><video src="video_DU1AJl5DQ-4.mp4" autoplay muted loop playsinline></video></div>
+      <div class="reel-card"><video src="video_DUk5MbSjWJd.mp4" autoplay muted loop playsinline></video></div>
+      <div class="reel-card"><video src="video_DXHtUA1Dfnh.mp4" autoplay muted loop playsinline></video></div>
+      <div class="reel-card"><video src="video_DWtk3TWjAkZ.mp4" autoplay muted loop playsinline></video></div>
+      <div class="reel-card"><video src="video_DU1AJl5DQ-4.mp4" autoplay muted loop playsinline></video></div>
+      <div class="reel-card"><video src="video_DUk5MbSjWJd.mp4" autoplay muted loop playsinline></video></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<section class="cta-band">
+  <div class="cta-marquee" aria-hidden="true">
+    <div class="cta-marquee-track">
+      <span>CHICKEN'GO</span><span class="dot">•</span>
+      <span>CHICKEN'GO</span><span class="dot">•</span>
+      <span>CHICKEN'GO</span><span class="dot">•</span>
+      <span>CHICKEN'GO</span><span class="dot">•</span>
+      <span>CHICKEN'GO</span><span class="dot">•</span>
+      <span>CHICKEN'GO</span><span class="dot">•</span>
+      <span>CHICKEN'GO</span><span class="dot">•</span>
+      <span>CHICKEN'GO</span><span class="dot">•</span>
+      <span>CHICKEN'GO</span><span class="dot">•</span>
+      <span>CHICKEN'GO</span><span class="dot">•</span>
+      <span>CHICKEN'GO</span><span class="dot">•</span>
+      <span>CHICKEN'GO</span><span class="dot">•</span>
+      <span>CHICKEN'GO</span><span class="dot">•</span>
+      <span>CHICKEN'GO</span><span class="dot">•</span>
+      <span>CHICKEN'GO</span><span class="dot">•</span>
+      <span>CHICKEN'GO</span><span class="dot">•</span>
+      <span>CHICKEN'GO</span><span class="dot">•</span>
+      <span>CHICKEN'GO</span><span class="dot">•</span>
+      <span>CHICKEN'GO</span><span class="dot">•</span>
+      <span>CHICKEN'GO</span><span class="dot">•</span>
+      <span>CHICKEN'GO</span><span class="dot">•</span>
+      <span>CHICKEN'GO</span><span class="dot">•</span>
+      <span>CHICKEN'GO</span><span class="dot">•</span>
+      <span>CHICKEN'GO</span><span class="dot">•</span>
+    </div>
+  </div>
+  <div class="container cta-band-inner">
+    <h3>Faim ? On monte ta box en 8 minutes.</h3>
+    <a href="menu.html" class="btn btn-dark"><i class="ph-bold ph-whatsapp-logo"></i> Commander maintenant</a>
+  </div>
+  <div class="cta-marquee" aria-hidden="true">
+    <div class="cta-marquee-track">
+      <span>CHICKEN'GO</span><span class="dot">•</span>
+      <span>CHICKEN'GO</span><span class="dot">•</span>
+      <span>CHICKEN'GO</span><span class="dot">•</span>
+      <span>CHICKEN'GO</span><span class="dot">•</span>
+      <span>CHICKEN'GO</span><span class="dot">•</span>
+      <span>CHICKEN'GO</span><span class="dot">•</span>
+      <span>CHICKEN'GO</span><span class="dot">•</span>
+      <span>CHICKEN'GO</span><span class="dot">•</span>
+      <span>CHICKEN'GO</span><span class="dot">•</span>
+      <span>CHICKEN'GO</span><span class="dot">•</span>
+      <span>CHICKEN'GO</span><span class="dot">•</span>
+      <span>CHICKEN'GO</span><span class="dot">•</span>
+      <span>CHICKEN'GO</span><span class="dot">•</span>
+      <span>CHICKEN'GO</span><span class="dot">•</span>
+      <span>CHICKEN'GO</span><span class="dot">•</span>
+      <span>CHICKEN'GO</span><span class="dot">•</span>
+      <span>CHICKEN'GO</span><span class="dot">•</span>
+      <span>CHICKEN'GO</span><span class="dot">•</span>
+      <span>CHICKEN'GO</span><span class="dot">•</span>
+      <span>CHICKEN'GO</span><span class="dot">•</span>
+      <span>CHICKEN'GO</span><span class="dot">•</span>
+      <span>CHICKEN'GO</span><span class="dot">•</span>
+      <span>CHICKEN'GO</span><span class="dot">•</span>
+      <span>CHICKEN'GO</span><span class="dot">•</span>
+    </div>
+  </div>
+</section>
+
+<!-- LOCALISATION -->
+<section class="section" id="trouver">
+  <div class="container">
+    <div class="locate">
+      <div class="locate-info">
+        <span class="eyebrow" style="color:var(--yellow)">Nous trouver</span>
+        <h2>TRIG <em>TLEGH</em>,<br>Sidi Bel Abbès.</h2>
+        <p>À deux pas du centre-ville. Place de parking juste en face, service à emporter en continu.</p>
+        <ul class="locate-list">
+          <li><span class="ico"><i class="ph-fill ph-map-pin"></i></span><div><strong>Adresse</strong><span>TRIG TLEGH, Sidi Bel Abbès, Algérie</span></div></li>
+          <li><span class="ico"><i class="ph-fill ph-clock"></i></span><div><strong>Horaires</strong><span>Tous les jours · 11h00 — 00h00</span></div></li>
+          <li><span class="ico"><i class="ph-fill ph-instagram-logo"></i></span><div><strong>Instagram</strong><span>@chickengo.sidi_bel_abbes</span></div></li>
+        </ul>
+        <div style="display:flex;gap:12px;flex-wrap:wrap">
+          <a href="https://www.google.com/maps/dir/?api=1&destination=35.18573920605816,-0.6385530943014769" target="_blank" rel="noopener" class="btn btn-yellow"><i class="ph-bold ph-navigation-arrow"></i> Itinéraire</a>
+          <a href="https://www.instagram.com/chickengo.sidi_bel_abbes/" class="btn btn-ghost"><i class="ph-bold ph-instagram-logo"></i> Instagram</a>
+        </div>
+      </div>
+      <div class="locate-map">
+        <iframe
+          src="https://www.google.com/maps?q=35.18573920605816,-0.6385530943014769&z=17&output=embed"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Chicken'Go — Sidi Bel Abbès"
+          allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="brand" style="color:#fff">
+          <span class="brand-logo"><img src="logo.png" alt="Chicken'Go" /></span>
+          <span class="brand-name" style="color:#fff">Chicken<i>'</i>Go</span>
+        </div>
+        <p>Le poulet croustillant qui fait parler tout Sidi Bel Abbès. Préparé le jour même, servi chaud, sans compromis.</p>
+        <div class="socials">
+          <a href="https://www.instagram.com/chickengo.sidi_bel_abbes/" aria-label="Instagram"><i class="ph-fill ph-instagram-logo"></i></a>
+          <a href="#" aria-label="Facebook"><i class="ph-fill ph-facebook-logo"></i></a>
+          <a href="#" aria-label="TikTok"><i class="ph-fill ph-tiktok-logo"></i></a>
+          <a href="#" aria-label="WhatsApp"><i class="ph-fill ph-whatsapp-logo"></i></a>
+        </div>
+      </div>
+      <div>
+        <h5>Menu</h5>
+        <a href="menu.html">Burgers</a>
+        <a href="menu.html">Box</a>
+        <a href="menu.html">Boissons & Desserts</a>
+        <a href="menu.html">Sauces</a>
+      </div>
+      <div>
+        <h5>Info</h5>
+        <a href="#concept">Concept</a>
+        <a href="#bestsellers">Galerie</a>
+        <a href="#reseaux">Nos réseaux</a>
+        <a href="#">Recrutement</a>
+      </div>
+      <div>
+        <h5>Contact</h5>
+        <a href="#">TRIG TLEGH</a>
+        <a href="#">Sidi Bel Abbès</a>
+        <a href="#">11h00 — 00h00</a>
+        <a href="https://www.instagram.com/chickengo.sidi_bel_abbes/">@chickengo.sidi_bel_abbes</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 Chicken'Go — Sidi Bel Abbès · Tous droits réservés.</div>
+      <div>Made in DZ</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ===== HERO BACKGROUND MARQUEE ROWS =====
+(function(){
+  var hero = document.querySelector('.hero');
+  if(!hero) return;
+  var rows = [
+    {text:'CHICKEN\'GO · CRISPY · ', rev:false},
+    {text:'CRUNCHY · FRESH · BOLD · ', rev:true},
+    {text:'POULET · BURGER · SBA · ', rev:false},
+    {text:'TENDERS · SAUCE · FRITES · ', rev:true},
+    {text:'CHICKEN\'GO · LOCAL · GÉNÉREUX · ', rev:false},
+    {text:'MADE IN DZ · FAIT MAISON · ', rev:true},
+    {text:'CROUSTILLANT · EXPRESS · ', rev:false},
+    {text:'CHICKEN\'GO · CRISPY · BOLD · ', rev:true},
+  ];
+  var bg = document.createElement('div');
+  bg.className = 'hero-bg';
+  bg.setAttribute('aria-hidden','true');
+  rows.forEach(function(row){
+    var rowEl = document.createElement('div');
+    rowEl.className = 'hero-bg-row';
+    var track = document.createElement('div');
+    track.className = 'hero-bg-track' + (row.rev ? ' hero-bg-rev' : '');
+    // 14 reps → first 7 = one set (>2560px at 78px font), second 7 = clone → translateX(-50%) loops seamlessly
+    track.textContent = row.text.repeat(14);
+    rowEl.appendChild(track);
+    bg.appendChild(rowEl);
+  });
+  hero.insertBefore(bg, hero.firstChild);
+})();
+</script>
+
+<script>
+  const header = document.querySelector('.header');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 20) header.style.boxShadow = '0 4px 20px rgba(0,0,0,.15)';
+    else header.style.boxShadow = 'none';
+  });
+</script>
+
+<script>
+// ===== REELS DRAG SCROLL =====
+(function(){
+  const track = document.getElementById('reelsTrack');
+  if (!track) return;
+  let isDragging = false, startX = 0, currentX = 0, animOffset = 0;
+
+  function getTranslateX(el){
+    const st = window.getComputedStyle(el);
+    const m = new DOMMatrix(st.transform);
+    return m.m41;
+  }
+
+  track.addEventListener('mousedown', e => {
+    isDragging = true;
+    track.classList.add('dragging');
+    animOffset = getTranslateX(track);
+    track.style.transform = 'translateX(' + animOffset + 'px)';
+    startX = e.clientX - animOffset;
+  });
+  document.addEventListener('mouseup', () => {
+    if (!isDragging) return;
+    isDragging = false;
+    track.classList.remove('dragging');
+    track.style.transform = '';
+  });
+  document.addEventListener('mousemove', e => {
+    if (!isDragging) return;
+    e.preventDefault();
+    currentX = e.clientX - startX;
+    track.style.transform = 'translateX(' + currentX + 'px)';
+  });
+  track.addEventListener('touchstart', e => {
+    track.classList.add('dragging');
+    animOffset = getTranslateX(track);
+    track.style.transform = 'translateX(' + animOffset + 'px)';
+    startX = e.touches[0].clientX - animOffset;
+  }, { passive: true });
+  track.addEventListener('touchend', () => {
+    track.classList.remove('dragging');
+    track.style.transform = '';
+  });
+  track.addEventListener('touchmove', e => {
+    currentX = e.touches[0].clientX - startX;
+    track.style.transform = 'translateX(' + currentX + 'px)';
+  }, { passive: true });
+})();
+</script>
+
+<script>
+// ===== MORPHING GRID GALLERY =====
+(function(){
+  const grid = document.getElementById('morphGrid');
+  if (!grid) return;
+
+  const INTERVAL = 1500;
+  const U = 100 / 3; // unité = 1/3 de la grille 3×3 ≈ 33.33%
+
+  // 5 cellules persistantes (DOM stable). Chaque layout définit pour chaque
+  // cellule ses 4 valeurs (top, left, width, height) en %.
+  // Chaque layout tuile parfaitement la grille 3×3 (9 cases).
+  const layouts = [
+    // L1 — A prend toute la colonne gauche
+    [
+      {t:0,    l:0,    w:U,    h:3*U}, // A
+      {t:0,    l:U,    w:2*U,  h:U  }, // B
+      {t:U,    l:U,    w:U,    h:2*U}, // C
+      {t:U,    l:2*U,  w:U,    h:U  }, // D
+      {t:2*U,  l:2*U,  w:U,    h:U  }  // E
+    ],
+    // L2 — A rétrécit, C s'élargit vers la GAUCHE en occupant la place libérée
+    [
+      {t:0,    l:0,    w:U,    h:U  }, // A (1×1, a perdu 2 lignes)
+      {t:0,    l:U,    w:2*U,  h:U  }, // B
+      {t:U,    l:0,    w:2*U,  h:2*U}, // C (grandit de 1 col à 2 cols, vers la gauche)
+      {t:U,    l:2*U,  w:U,    h:U  }, // D
+      {t:2*U,  l:2*U,  w:U,    h:U  }  // E
+    ],
+    // L3 — A moyenne, E devient un bandeau bas pleine largeur
+    [
+      {t:0,    l:0,    w:U,    h:2*U}, // A (2×1)
+      {t:0,    l:U,    w:2*U,  h:U  }, // B
+      {t:U,    l:U,    w:U,    h:U  }, // C (ramenée à 1×1)
+      {t:U,    l:2*U,  w:U,    h:U  }, // D
+      {t:2*U,  l:0,    w:3*U,  h:U  }  // E (s'étend à toute la largeur en bas)
+    ],
+    // L4 — D devient une grande cellule verticale à droite, B redevient carré
+    [
+      {t:0,    l:0,    w:U,    h:3*U}, // A
+      {t:0,    l:U,    w:U,    h:U  }, // B (rétréci à 1×1)
+      {t:U,    l:U,    w:U,    h:2*U}, // C
+      {t:0,    l:2*U,  w:U,    h:2*U}, // D (grandit vers le HAUT, 1→2 lignes)
+      {t:2*U,  l:2*U,  w:U,    h:U  }  // E
+    ]
+  ];
+
+  const images = [
+    'image-du-burger.png',            // A
+    'image-burger-en-preparation.png',// B
+    'image-box-en-preparation.png',   // C
+    'image-du-resto.png',             // D
+    'image-du-burger.png'             // E
+  ];
+
+  // Création des 5 cellules persistantes — jamais détruites
+  const cells = images.map(src => {
+    const el = document.createElement('div');
+    el.className = 'morph-cell';
+    el.innerHTML =
+      '<div class="morph-cell-inner">' +
+        '<img src="' + src + '" alt="" draggable="false" />' +
+      '</div>';
+    grid.appendChild(el);
+    return el;
+  });
+
+  let currentIdx = 0;
+
+  function applyLayout(idx){
+    const next = layouts[idx];
+    cells.forEach((el, i) => {
+      const n = next[i];
+      el.style.top    = n.t + '%';
+      el.style.left   = n.l + '%';
+      el.style.width  = n.w + '%';
+      el.style.height = n.h + '%';
+    });
+    currentIdx = idx;
+  }
+
+  // Placement initial (sans transition, on applique direct puis on fait apparaître)
+  (function initialRender(){
+    const first = layouts[0];
+    cells.forEach((el, i) => {
+      el.style.transition = 'none';
+      el.style.top    = first[i].t + '%';
+      el.style.left   = first[i].l + '%';
+      el.style.width  = first[i].w + '%';
+      el.style.height = first[i].h + '%';
+    });
+    // Force reflow puis réactive les transitions
+    void grid.offsetHeight;
+    cells.forEach(el => el.style.transition = '');
+    requestAnimationFrame(() => {
+      cells.forEach((el, idx) => {
+        setTimeout(() => el.classList.add('is-in'), 40 + idx * 70);
+      });
+    });
+  })();
+
+  function tick(){
+    let next;
+    do { next = Math.floor(Math.random() * layouts.length); }
+    while (next === currentIdx);
+    applyLayout(next);
+  }
+
+  setInterval(tick, INTERVAL);
+
+  // Pause quand l'onglet est caché
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden && timerId){
+      clearTimeout(timerId); timerId = null;
+    } else if (!document.hidden && !timerId){
+      timerId = setTimeout(tick, INTERVAL);
+    }
+  });
+})();
+</script>
+
+<script>
+// ===== LETTER SWAP — tous les boutons =====
+(function(){
+  function initLetterSwap(selector){
+    document.querySelectorAll(selector).forEach(function(btn){
+      var charIndex = 0;
+      Array.from(btn.childNodes).forEach(function(node){
+        if(node.nodeType !== 3) return;          // garde seulement les nœuds texte
+        var text = node.textContent;
+        if(!text.trim()) return;                 // ignore whitespace pur
+        var wrap = document.createElement('span');
+        wrap.className = 'ls-wrap';
+        text.split('').forEach(function(char){
+          var pair = document.createElement('span');
+          pair.className = 'ls-char-pair';
+          pair.style.setProperty('--ls-delay', (charIndex * 0.022) + 's');
+          charIndex++;
+          var a = document.createElement('span');
+          a.className = 'ls-char-a';
+          a.textContent = char;
+          var b = document.createElement('span');
+          b.className = 'ls-char-b';
+          b.textContent = char;
+          b.setAttribute('aria-hidden','true');
+          pair.appendChild(a);
+          pair.appendChild(b);
+          wrap.appendChild(pair);
+        });
+        node.parentNode.replaceChild(wrap, node);
+      });
+      btn.classList.add('ls-btn');
+    });
+  }
+  initLetterSwap('.btn, .morph-btn, .reels-socials a, .nav a, .mobile-nav-links a');
+})();
+</script>
+
+<script>
+// ===== MOBILE NAV =====
+(function(){
+  var toggle = document.querySelector('.burger-toggle');
+  var nav    = document.getElementById('mobileNav');
+  var overlay= document.getElementById('mobileOverlay');
+  var close  = document.getElementById('mobileNavClose');
+  function open(){nav.classList.add('open');overlay.classList.add('open');document.body.style.overflow='hidden';}
+  function shut(){nav.classList.remove('open');overlay.classList.remove('open');document.body.style.overflow='';}
+  if(toggle) toggle.addEventListener('click', open);
+  if(close)  close.addEventListener('click', shut);
+  if(overlay)overlay.addEventListener('click', shut);
+  document.querySelectorAll('.mobile-nav-links a').forEach(function(a){
+    a.addEventListener('click', shut);
+  });
+})();
+</script>
+
+<script>
+// ===== TEXT EFFECT (scroll-triggered word slide-up) =====
+(function(){
+  function wrapWords(root){
+    var idx = 0;
+    function walk(node){
+      Array.from(node.childNodes).forEach(function(child){
+        if(child.nodeType === 3){
+          var text = child.textContent;
+          if(!text.trim()){return;}
+          var frag = document.createDocumentFragment();
+          text.split(/(\s+)/).forEach(function(part){
+            if(part.trim()){
+              var sp = document.createElement('span');
+              sp.className = 'te-word';
+              sp.style.setProperty('--te-delay',(idx*0.065)+'s');
+              sp.textContent = part;
+              frag.appendChild(sp);
+              idx++;
+            } else {
+              frag.appendChild(document.createTextNode(part));
+            }
+          });
+          child.parentNode.replaceChild(frag, child);
+        } else if(child.nodeType === 1){
+          walk(child);
+        }
+      });
+    }
+    walk(root);
+  }
+
+  var targets = document.querySelectorAll('.section-head h2, .story-text h2, .morph-text h2, .locate-info h2, .hero h1');
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){e.target.classList.add('te-ready');obs.unobserve(e.target);}
+    });
+  },{threshold:0.15});
+
+  targets.forEach(function(el){
+    wrapWords(el);
+    obs.observe(el);
+  });
+})();
+</script>
+</body>
+</html>

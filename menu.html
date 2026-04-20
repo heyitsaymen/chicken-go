@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Chicken'Go — Menu</title>
+<meta name="description" content="Le menu Chicken'Go : burgers, box, boissons et desserts. À Sidi Bel Abbès." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/bold/style.css">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
+
+<style>
+:root{
+  --red:        #DA1B20;
+  --red-dark:   #A60F14;
+  --yellow:     #F4A825;
+  --cream:      #F7F2EA;
+  --paper:      #FFFDF9;
+  --ink:        #141414;
+
+  --display: "Anton", system-ui, sans-serif;
+  --sans:    "Inter", system-ui, -apple-system, sans-serif;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+body{
+  font-family:var(--sans);
+  overflow:hidden;
+  touch-action:pan-y;
+  background:#000;
+  color:var(--ink);
+  -webkit-font-smoothing:antialiased;
+}
+[class^="ph-"], [class*=" ph-"]{line-height:1}
+button{font-family:inherit;cursor:pointer;border:none;background:none}
+a{color:inherit;text-decoration:none}
+
+.app-container{
+  width:100vw;height:100vh;overflow:hidden;
+  background:var(--red);
+  display:flex;align-items:center;justify-content:center;
+}
+
+.main-wrapper{
+  width:100%;height:100%;
+  max-width:640px;
+  display:flex;flex-direction:column;
+  padding: clamp(8px, 1.8vh, 20px) clamp(10px, 2vw, 22px) clamp(16px, 3vh, 32px);
+  gap: clamp(6px, 1vh, 12px);
+  animation: fadeIn .6s cubic-bezier(.4,0,.2,1);
+}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+/* -------- HEADER -------- */
+.menu-header{
+  display:flex;justify-content:space-between;align-items:center;
+  padding: 0 clamp(4px,1vw,10px);
+  flex-shrink:0;
+  min-height: clamp(56px, 9vh, 96px);
+}
+.icon-btn{
+  width: clamp(44px,10vw,58px);
+  height: clamp(44px,10vw,58px);
+  background:#fff;
+  border-radius: clamp(12px,2.5vw,16px);
+  display:flex;align-items:center;justify-content:center;
+  transition: transform .3s cubic-bezier(.34,1.56,.64,1), background-color .2s ease;
+  color:var(--ink);
+  font-size: clamp(20px,5vw,26px);
+  flex-shrink:0;
+}
+.icon-btn:active{transform:scale(.94)}
+@media (hover:hover){
+  .icon-btn:hover{transform:scale(1.06);background:#f0eee8}
+}
+
+.logo{
+  width: clamp(62px,14vw,96px);
+  height: clamp(62px,14vw,96px);
+  background:#fff;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;flex-shrink:0;
+  box-shadow: 0 6px 18px rgba(0,0,0,.2);
+}
+.logo img{width:100%;height:100%;object-fit:cover}
+
+/* -------- CATEGORIES -------- */
+.categories{
+  display:flex;
+  gap: clamp(6px,1.5vw,12px);
+  justify-content:space-between;
+  flex-shrink:0;
+}
+.category-btn{
+  flex:1;
+  border-radius: clamp(14px,3vw,20px);
+  padding: clamp(10px,1.8vh,16px) clamp(6px,1.5vw,10px);
+  font-size: clamp(10px,2.8vw,13px);
+  font-weight:700;letter-spacing:.3px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap: clamp(4px,1vh,8px);
+  color:var(--ink);
+  min-height: clamp(58px,10vh,78px);
+  line-height:1.2;
+  background:#fff;
+  transition: all .35s cubic-bezier(.34,1.56,.64,1), background-color .25s ease;
+  will-change: transform, background-color;
+  text-transform:uppercase;
+}
+.category-btn i{
+  font-size: clamp(20px,4.8vw,26px);
+  color:var(--ink);
+}
+.category-btn:active{transform:scale(.98)}
+@media (hover:hover){
+  .category-btn:hover{background:#f0eee8}
+}
+.category-btn.active{
+  background:var(--yellow);
+  transform:scale(1.03);
+  box-shadow: 0 6px 18px rgba(0,0,0,.25);
+}
+.category-btn.active i{color:var(--ink)}
+
+/* -------- CONTENT -------- */
+.content-wrapper{
+  position:relative;flex:1;overflow:hidden;min-height:0;
+  perspective:1200px;
+}
+.content-inner{
+  position:absolute;inset:0;width:100%;height:100%;
+  display:flex;flex-direction:column;
+  gap: clamp(6px,1vh,10px);
+  transition: all .5s cubic-bezier(.4,0,.2,1);
+  transform: translateY(0) rotateX(0deg) scale(1);
+  opacity:1;
+  will-change:transform, opacity;
+}
+.content-inner.hidden-top{
+  transform: translateY(-100%) rotateX(20deg) scale(.95);
+  opacity:0;pointer-events:none;
+}
+.content-inner.hidden-bottom{
+  transform: translateY(100%) rotateX(-20deg) scale(.95);
+  opacity:0;pointer-events:none;
+}
+
+/* -------- CAROUSEL -------- */
+.carousel-container{
+  position:relative;flex:1;overflow:hidden;
+  max-height:50vh;
+  perspective:2000px;
+}
+.carousel-inner{
+  width:100%;height:100%;
+  display:flex;align-items:center;justify-content:center;
+}
+.carousel-slides{
+  position:relative;
+  width:100%;height:100%;
+  max-width:520px;
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
+}
+.carousel-track{
+  display:flex;width:100%;height:100%;
+  transition: transform .8s cubic-bezier(.25,.46,.45,.94);
+  will-change:transform;
+}
+.carousel-slide{
+  min-width:100%;width:100%;height:100%;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;padding: clamp(4px,1vw,10px);
+}
+.slide-content{
+  width: clamp(200px,72vw,420px);
+  height: clamp(200px,72vw,420px);
+  aspect-ratio:1/1;
+  background:#fff;
+  border-radius: clamp(18px,4vw,28px);
+  padding: 0;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow: 0 12px 28px rgba(0,0,0,.22);
+  transition: transform .4s cubic-bezier(.34,1.56,.64,1), box-shadow .4s ease;
+  overflow:hidden;
+}
+.carousel-slide:hover .slide-content{
+  transform:scale(1.03);
+  box-shadow: 0 16px 36px rgba(0,0,0,.3);
+}
+.slide-image{
+  width:100%;height:100%;
+  border-radius: clamp(18px,4vw,28px);
+  overflow:hidden;
+  position:relative;
+  background:linear-gradient(135deg, #f7f2ea, #e8dfcf);
+}
+.slide-image img{
+  width:100%;height:100%;object-fit:cover;
+  transition:transform .6s ease;
+}
+.carousel-slide:hover .slide-image img{transform:scale(1.05)}
+
+.slide-badge{
+  position:absolute;top:12px;left:12px;
+  background:var(--red);color:#fff;
+  padding:6px 12px;border-radius:8px;
+  font-size: clamp(10px,2.6vw,12px);
+  font-weight:800;letter-spacing:.5px;text-transform:uppercase;
+  display:inline-flex;align-items:center;gap:6px;
+  box-shadow: 0 4px 10px rgba(0,0,0,.2);
+}
+.slide-badge i{font-size:12px}
+
+/* -------- PRODUCT INFO -------- */
+.product-info{
+  background:#fff;
+  border-radius: clamp(16px,3.5vw,24px);
+  padding: clamp(12px,2.5vw,18px);
+  display:flex;flex-direction:column;
+  gap: clamp(4px,.8vh,8px);
+  flex-shrink:0;
+  box-shadow: 0 6px 18px rgba(0,0,0,.12);
+}
+.product-header{
+  display:flex;justify-content:space-between;align-items:start;
+  gap: clamp(10px,2.5vw,16px);
+}
+.product-name{
+  font-family:var(--display);
+  font-size: clamp(16px,4.2vw,22px);
+  color:var(--ink);line-height:1.1;flex:1;
+  text-transform:uppercase;letter-spacing:.3px;
+  animation: fadeUp .5s cubic-bezier(.25,.46,.45,.94) forwards;
+}
+.product-price{
+  font-family:var(--display);
+  font-size: clamp(16px,4.2vw,22px);
+  color:var(--red);white-space:nowrap;flex-shrink:0;
+  animation: fadeUp .5s cubic-bezier(.25,.46,.45,.94) .08s forwards;
+}
+.product-details{
+  font-size: clamp(11px,2.7vw,13.5px);
+  color:#555;line-height:1.4;
+  animation: fadeUp .5s cubic-bezier(.25,.46,.45,.94) .16s forwards;
+}
+.product-actions{
+  display:flex;gap:8px;align-items:center;margin-top: clamp(4px,1vh,8px);
+  animation: fadeUp .5s cubic-bezier(.25,.46,.45,.94) .24s forwards;
+}
+.add-btn{
+  flex:1;
+  background:var(--red);color:#fff;
+  padding: clamp(10px,1.8vh,14px);
+  border-radius: clamp(10px,2.5vw,14px);
+  font-weight:700;letter-spacing:.3px;text-transform:uppercase;
+  font-size: clamp(11px,2.8vw,13px);
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  transition:background .2s, transform .2s;
+}
+.add-btn:hover{background:var(--red-dark)}
+.add-btn:active{transform:scale(.97)}
+.add-btn i{font-size:16px}
+
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(12px);filter:blur(4px)}
+  to{opacity:1;transform:translateY(0);filter:blur(0)}
+}
+
+/* -------- NAVIGATION -------- */
+.navigation{
+  display:flex;justify-content:space-between;align-items:center;
+  padding: 0 clamp(4px,1vw,10px);
+  flex-shrink:0;
+  gap: clamp(10px,2vw,16px);
+}
+.nav-btn{
+  width: clamp(50px,11vw,64px);
+  height: clamp(50px,11vw,64px);
+  background:#fff;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow: 0 4px 14px rgba(0,0,0,.18);
+  transition: all .3s cubic-bezier(.34,1.56,.64,1);
+  color:var(--ink);font-size: clamp(22px,5.5vw,28px);
+  flex-shrink:0;
+}
+.nav-btn:active{transform:scale(.92);background:#f0eee8}
+@media (hover:hover){
+  .nav-btn:hover{background:#f0eee8;transform:scale(1.08);box-shadow: 0 8px 20px rgba(0,0,0,.2)}
+}
+
+.pagination{
+  display:flex;gap:8px;align-items:center;justify-content:center;
+  flex:1;
+}
+.pag-dot{
+  width:8px;height:8px;border-radius:50%;
+  background: rgba(255,255,255,.4);
+  transition: all .3s ease;
+}
+.pag-dot.active{
+  background:var(--yellow);
+  width:28px;border-radius:4px;
+}
+
+/* -------- BACK TO HOME -------- */
+.back-home{
+  position:absolute;top:16px;left:16px;z-index:10;
+  background:rgba(0,0,0,.3);backdrop-filter:blur(6px);
+  color:#fff;padding:10px 14px;border-radius:999px;
+  font-size:13px;font-weight:600;
+  display:inline-flex;align-items:center;gap:8px;
+  transition:background .2s;
+}
+.back-home:hover{background:rgba(0,0,0,.5)}
+.back-home i{font-size:16px}
+
+@media (max-width: 640px){
+  .back-home{font-size:11px;padding:8px 12px}
+}
+
+/* Petit mobile */
+@media (max-width: 420px){
+  .main-wrapper{
+    padding: 8px 10px 16px;
+    gap: 6px;
+  }
+  .menu-header{min-height:52px}
+  .icon-btn{width:42px;height:42px;font-size:18px;border-radius:12px}
+  .logo{width:58px;height:58px}
+  .category-btn{
+    padding:8px 4px;
+    font-size:10px;
+    min-height:56px;
+    gap:3px;
+    border-radius:14px;
+  }
+  .category-btn i{font-size:18px}
+  .slide-content{
+    width: clamp(170px, 76vw, 360px);
+    height: clamp(170px, 76vw, 360px);
+    padding:0;
+    border-radius:18px;
+  }
+  .slide-image{border-radius:18px}
+  .slide-badge{
+    top:8px;left:8px;
+    padding:4px 8px;font-size:10px;
+  }
+  .product-info{
+    padding:10px 12px;
+    border-radius:14px;
+    gap:4px;
+  }
+  .product-header{gap:10px}
+  .product-name, .product-price{font-size:15px;line-height:1.05}
+  .product-details{font-size:11px;line-height:1.35}
+  .add-btn{
+    padding:10px 8px;
+    font-size:11px;
+    border-radius:10px;
+    gap:6px;
+  }
+  .add-btn i{font-size:14px}
+  .nav-btn{
+    width:46px;height:46px;font-size:20px;
+  }
+  .pag-dot{width:6px;height:6px}
+  .pag-dot.active{width:22px}
+  .back-home{
+    top:10px;left:10px;
+    font-size:10px;padding:6px 10px;
+  }
+  .back-home i{font-size:12px}
+}
+
+/* Ultra-étroit — 250-320px */
+@media (max-width: 320px){
+  .main-wrapper{
+    padding: 6px 8px 12px;
+    gap: 4px;
+  }
+  .menu-header{
+    min-height:46px;
+    padding:0 2px;
+  }
+  .icon-btn{
+    width:36px;height:36px;
+    font-size:16px;border-radius:10px;
+  }
+  .logo{width:46px;height:46px}
+  .categories{gap:4px}
+  .category-btn{
+    padding:6px 2px;
+    font-size:8.5px;
+    min-height:46px;
+    gap:2px;
+    border-radius:10px;
+    letter-spacing:0;
+  }
+  .category-btn i{font-size:15px}
+  .carousel-container{max-height:42vh}
+  .slide-content{
+    width: clamp(140px, 78vw, 200px);
+    height: clamp(140px, 78vw, 200px);
+    padding:0;
+    border-radius:14px;
+  }
+  .slide-image{border-radius:14px}
+  .slide-badge{
+    top:6px;left:6px;
+    padding:3px 6px;font-size:8.5px;
+    border-radius:6px;
+    gap:3px;
+  }
+  .slide-badge i{font-size:9px}
+  .carousel-slide{padding:2px}
+  .product-info{
+    padding:8px 10px;
+    border-radius:12px;
+    gap:3px;
+  }
+  .product-header{gap:6px}
+  .product-name, .product-price{font-size:12.5px;line-height:1.05;letter-spacing:.1px}
+  .product-details{font-size:10px;line-height:1.3}
+  .product-actions{margin-top:4px}
+  .add-btn{
+    padding:8px 4px;
+    font-size:9.5px;
+    border-radius:8px;
+    gap:4px;
+    letter-spacing:0;
+  }
+  .add-btn i{font-size:12px}
+  .navigation{
+    padding:0 2px;
+    gap:6px;
+  }
+  .nav-btn{
+    width:36px;height:36px;
+    font-size:16px;
+  }
+  .pagination{gap:4px}
+  .pag-dot{width:5px;height:5px}
+  .pag-dot.active{width:16px;border-radius:3px}
+  .back-home{
+    top:6px;left:6px;
+    font-size:9px;padding:4px 8px;
+    gap:4px;
+  }
+  .back-home i{font-size:10px}
+}
+
+/* Écrans très courts en hauteur */
+@media (max-height: 560px){
+  .main-wrapper{gap:4px}
+  .menu-header{min-height:42px}
+  .logo{width:42px;height:42px}
+  .icon-btn{width:38px;height:38px;font-size:16px}
+  .category-btn{min-height:46px;padding:6px 4px;font-size:10px}
+  .category-btn i{font-size:16px}
+  .carousel-container{max-height:38vh}
+  .slide-content{width: clamp(130px, 38vh, 260px);height: clamp(130px, 38vh, 260px)}
+  .nav-btn{width:40px;height:40px;font-size:18px}
+}
+</style>
+</head>
+<body>
+
+<div class="app-container">
+  <div class="main-wrapper">
+
+    <!-- HEADER -->
+    <div class="menu-header">
+      <a href="index.html" class="icon-btn" aria-label="Accueil">
+        <i class="ph-bold ph-arrow-left"></i>
+      </a>
+
+      <div class="logo">
+        <img src="logo.png" alt="Chicken'Go" />
+      </div>
+
+      <div class="icon-btn" aria-hidden="true" style="opacity:0;pointer-events:none"></div>
+    </div>
+
+    <!-- CATEGORIES -->
+    <div class="categories" id="categories"></div>
+
+    <!-- CONTENT -->
+    <div class="content-wrapper">
+      <div class="content-inner" id="contentInner">
+        <div class="carousel-container" id="carouselContainer">
+          <div class="carousel-inner">
+            <div class="carousel-slides" id="carouselSlides"></div>
+          </div>
+        </div>
+
+        <div class="product-info">
+          <div class="product-header">
+            <div class="product-name" id="productName"></div>
+            <div class="product-price" id="productPrice"></div>
+          </div>
+          <div class="product-details" id="productDetails"></div>
+          <div class="product-actions">
+            <button class="add-btn"><i class="ph-bold ph-plus-circle"></i> Ajouter à la commande</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- NAVIGATION -->
+    <div class="navigation">
+      <button class="nav-btn" id="prevBtn" aria-label="Précédent">
+        <i class="ph-bold ph-caret-left"></i>
+      </button>
+      <div class="pagination" id="pagination"></div>
+      <button class="nav-btn" id="nextBtn" aria-label="Suivant">
+        <i class="ph-bold ph-caret-right"></i>
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  const products = {
+    burger: [
+      { name: "Chicken Burger Classic", price: "500 DA", details: "Poulet croustillant, salade fraîche, tomate, sauce spéciale Chicken'Go.", img: "image-du-burger.png", badge: "Best-seller", icon: "ph-fire" },
+      { name: "Spicy Chicken Burger", price: "550 DA", details: "Poulet épicé, jalapeños, fromage cheddar, sauce piquante maison.", img: "image-burger-en-preparation.png", badge: "Spicy", icon: "ph-flame" },
+      { name: "Double Chicken Burger", price: "700 DA", details: "Double portion de poulet, double fromage, sauce barbecue fumée.", img: "image-du-burger.png", badge: "XXL", icon: "ph-stack" },
+      { name: "Chicken Ranch Burger", price: "600 DA", details: "Poulet grillé, bacon de dinde, sauce ranch, laitue croquante.", img: "image-burger-en-preparation.png", badge: "Nouveau", icon: "ph-star" }
+    ],
+    box: [
+      { name: "Box Tenders", price: "650 DA", details: "6 tenders croustillants, frites dorées, sauce au choix.", img: "image-box-en-preparation.png", badge: "Populaire", icon: "ph-fire" },
+      { name: "Box Wings", price: "700 DA", details: "8 ailes de poulet épicées, frites, sauce BBQ maison.", img: "image-box-en-preparation.png", badge: "Spicy", icon: "ph-flame" },
+      { name: "Box Nuggets", price: "500 DA", details: "10 nuggets croustillants, frites dorées, sauce ketchup.", img: "image-box-en-preparation.png", badge: "Kids", icon: "ph-baby" },
+      { name: "Box Family", price: "1500 DA", details: "Mix tenders + wings + nuggets, grandes frites, 4 sauces au choix.", img: "image-box-en-preparation.png", badge: "Family", icon: "ph-users-three" }
+    ],
+    boisson: [
+      { name: "Coca-Cola", price: "150 DA", details: "Boisson fraîche gazeuse, 33cl.", img: "image-du-resto.png", badge: "Classique", icon: "ph-drop" },
+      { name: "Sprite", price: "150 DA", details: "Boisson fraîche citron, 33cl.", img: "image-du-resto.png", badge: "Fraîcheur", icon: "ph-drop" },
+      { name: "Fanta Orange", price: "150 DA", details: "Boisson fraîche orange, 33cl.", img: "image-du-resto.png", badge: "Classique", icon: "ph-drop" },
+      { name: "Ice Tea Pêche", price: "200 DA", details: "Thé glacé saveur pêche, 33cl.", img: "image-du-resto.png", badge: "Nouveau", icon: "ph-star" },
+      { name: "Milkshake Vanille", price: "350 DA", details: "Milkshake onctueux à la vanille bourbon.", img: "image-du-resto.png", badge: "Dessert", icon: "ph-ice-cream" },
+      { name: "Sundae Chocolat", price: "300 DA", details: "Glace vanille, sauce chocolat, chantilly maison.", img: "image-du-resto.png", badge: "Dessert", icon: "ph-ice-cream" }
+    ]
+  };
+
+  const categories = [
+    { key: 'burger',  label: 'Burger',    icon: 'ph-hamburger' },
+    { key: 'box',     label: 'Box',       icon: 'ph-package' },
+    { key: 'boisson', label: 'Drink & Dessert', icon: 'ph-coffee' }
+  ];
+
+  let currentCategory = 'burger';
+  let currentIndices = { burger: 0, box: 0, boisson: 0 };
+  let touchStartX = 0;
+  let touchEndX = 0;
+
+  function renderCategories(){
+    const container = document.getElementById('categories');
+    container.innerHTML = categories.map(cat => `
+      <button class="category-btn ${currentCategory === cat.key ? 'active' : ''}" data-category="${cat.key}">
+        <i class="ph-bold ${cat.icon}"></i>
+        <span>${cat.label}</span>
+      </button>
+    `).join('');
+
+    container.querySelectorAll('.category-btn').forEach(btn => {
+      btn.addEventListener('click', () => switchCategory(btn.dataset.category));
+    });
+  }
+
+  function renderCarousel(){
+    const container = document.getElementById('carouselSlides');
+    const items = products[currentCategory];
+
+    let html = '<div class="carousel-track">';
+    items.forEach(product => {
+      html += `
+        <div class="carousel-slide">
+          <div class="slide-content">
+            <div class="slide-image">
+              <span class="slide-badge"><i class="ph-fill ${product.icon}"></i> ${product.badge}</span>
+              <img src="${product.img}" alt="${product.name}" />
+            </div>
+          </div>
+        </div>
+      `;
+    });
+    html += '</div>';
+    container.innerHTML = html;
+    updateCarouselPosition();
+  }
+
+  function renderPagination(){
+    const container = document.getElementById('pagination');
+    const items = products[currentCategory];
+    const current = currentIndices[currentCategory];
+    container.innerHTML = items.map((_, i) => `
+      <div class="pag-dot ${i === current ? 'active' : ''}"></div>
+    `).join('');
+  }
+
+  function updateCarouselPosition(){
+    const track = document.querySelector('.carousel-track');
+    if (!track) return;
+    const offset = -currentIndices[currentCategory] * 100;
+    track.style.transform = `translateX(${offset}%)`;
+  }
+
+  function updateProductInfo(){
+    const idx = currentIndices[currentCategory];
+    const product = products[currentCategory][idx];
+    const nameEl = document.getElementById('productName');
+    const priceEl = document.getElementById('productPrice');
+    const detailsEl = document.getElementById('productDetails');
+
+    [nameEl, priceEl, detailsEl].forEach(el => { el.style.animation = 'none'; });
+
+    setTimeout(() => {
+      nameEl.textContent = product.name;
+      priceEl.textContent = product.price;
+      detailsEl.textContent = product.details;
+      nameEl.style.animation = 'fadeUp .5s cubic-bezier(.25,.46,.45,.94) forwards';
+      priceEl.style.animation = 'fadeUp .5s cubic-bezier(.25,.46,.45,.94) .08s forwards';
+      detailsEl.style.animation = 'fadeUp .5s cubic-bezier(.25,.46,.45,.94) .16s forwards';
+    }, 10);
+
+    renderPagination();
+  }
+
+  function navigate(direction){
+    const max = products[currentCategory].length - 1;
+    let next = currentIndices[currentCategory] + direction;
+    if (next > max) next = 0;
+    else if (next < 0) next = max;
+    currentIndices[currentCategory] = next;
+    updateCarouselPosition();
+    updateProductInfo();
+  }
+
+  function switchCategory(newCat){
+    if (newCat === currentCategory) return;
+    const order = ['burger','box','boisson'];
+    const oldIdx = order.indexOf(currentCategory);
+    const newIdx = order.indexOf(newCat);
+    const inner = document.getElementById('contentInner');
+    inner.className = 'content-inner ' + (newIdx > oldIdx ? 'hidden-bottom' : 'hidden-top');
+    setTimeout(() => {
+      currentCategory = newCat;
+      inner.className = 'content-inner';
+      renderCategories();
+      renderCarousel();
+      updateProductInfo();
+    }, 120);
+  }
+
+  function handleTouchStart(e){ touchStartX = e.changedTouches[0].screenX; }
+  function handleTouchEnd(e){
+    touchEndX = e.changedTouches[0].screenX;
+    const threshold = 50;
+    if (touchStartX - touchEndX > threshold) navigate(1);
+    else if (touchEndX - touchStartX > threshold) navigate(-1);
+  }
+  function handleKey(e){
+    if (e.key === 'ArrowLeft') navigate(-1);
+    if (e.key === 'ArrowRight') navigate(1);
+  }
+
+  document.getElementById('prevBtn').addEventListener('click', () => navigate(-1));
+  document.getElementById('nextBtn').addEventListener('click', () => navigate(1));
+  const carousel = document.getElementById('carouselContainer');
+  carousel.addEventListener('touchstart', handleTouchStart);
+  carousel.addEventListener('touchend', handleTouchEnd);
+  window.addEventListener('keydown', handleKey);
+
+  renderCategories();
+  renderCarousel();
+  updateProductInfo();
+</script>
+</body>
+</html>
