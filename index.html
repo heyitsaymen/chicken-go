@@ -186,7 +186,7 @@ button{font-family:inherit;cursor:pointer;border:none}
 }
 .hero-visual{position:relative;aspect-ratio:3/2;transform:scale(1.15);transform-origin:center;animation:heroVisualIn .9s cubic-bezier(.22,1,.36,1) .15s both}
 .hero-photo{position:absolute;inset:0;background:transparent;border:none;box-shadow:none;border-radius:0;overflow:visible}
-.hero-photo video{width:100%;height:100%;object-fit:contain;background:transparent;border:none;outline:none;display:block}
+.hero-photo video,.hero-photo img{width:100%;height:100%;object-fit:contain;background:transparent;border:none;outline:none;display:block}
 
 .hero-badge{
   position:absolute;top:-2%;right:-6%;width:140px;height:140px;border-radius:50%;
@@ -936,7 +936,7 @@ body.loading{overflow:hidden}
 
     <div class="hero-visual">
       <div class="hero-photo">
-        <video src="burger_red.mp4" autoplay loop muted playsinline aria-label="Burger Chicken'Go en rotation"></video>
+        <img src="burger.webp" alt="Burger Chicken'Go en rotation" decoding="async">
       </div>
     </div>
   </div>
