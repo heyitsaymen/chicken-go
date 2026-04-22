@@ -605,6 +605,15 @@ button{font-family:inherit;cursor:pointer;border:none}
   transition:opacity .2s,transform .2s;
 }
 .mobile-nav-links a:hover{opacity:1;transform:scale(1.04)}
+.mobile-cta-commander{
+  margin-top:18px;background:var(--yellow);color:var(--ink) !important;
+  padding:14px 28px !important;border-radius:999px;font-weight:900 !important;
+  text-transform:uppercase;letter-spacing:.5px;
+  display:inline-flex !important;align-items:center;gap:8px;
+  box-shadow:0 8px 22px rgba(244,168,37,.45);
+  font-size:1rem !important;
+}
+.mobile-cta-commander i{font-size:18px}
 .mobile-nav-close{
   position:absolute;top:20px;right:20px;
   background:rgba(255,255,255,.12);border:none;color:#fff;
@@ -664,6 +673,7 @@ button{font-family:inherit;cursor:pointer;border:none}
   .hero-visual{order:1;max-width:420px;margin:0 auto;width:100%;transform:none}
   .nav{display:none}
   .burger-toggle{display:block}
+  .header .btn-yellow{display:none}
   .menu-grid{grid-template-columns:repeat(2,1fr)}
   .pillars{grid-template-columns:1fr}
   .bento{grid-template-columns:repeat(2,1fr)}
@@ -916,6 +926,7 @@ body.loading{overflow:hidden}
     <a href="menu.html" class="ls-btn">Menu</a>
     <a href="#bestsellers" class="ls-btn">Galerie</a>
     <a href="#reseaux" class="ls-btn">Nos réseaux</a>
+    <a href="menu.html" class="mobile-cta-commander"><i class="ph-bold ph-shopping-bag"></i> Commander</a>
   </div>
 </nav>
 
@@ -935,9 +946,7 @@ body.loading{overflow:hidden}
     </div>
 
     <div class="hero-visual">
-      <div class="hero-photo">
-        <img src="burger.webp" alt="Burger Chicken'Go en rotation" decoding="async">
-      </div>
+      <div class="hero-photo" id="heroPhoto" data-webm="burger.webm" data-webp="burger.webp" aria-label="Burger Chicken'Go en rotation"></div>
     </div>
   </div>
 </section>
@@ -1263,6 +1272,39 @@ body.loading{overflow:hidden}
     </div>
   </div>
 </footer>
+
+<script>
+// ===== HERO BURGER: WebM (fast, GPU) for most browsers, WebP fallback for iOS Safari =====
+(function(){
+  var el = document.getElementById('heroPhoto');
+  if(!el) return;
+  var ua = navigator.userAgent;
+  var isIOS = /iPad|iPhone|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  var isSafari = /^((?!chrome|android|crios|fxios).)*safari/i.test(ua);
+  var useImg = isIOS || isSafari;
+  if(useImg){
+    var img = document.createElement('img');
+    img.src = el.dataset.webp;
+    img.alt = el.getAttribute('aria-label') || '';
+    img.decoding = 'async';
+    img.fetchPriority = 'high';
+    el.appendChild(img);
+  } else {
+    var v = document.createElement('video');
+    v.src = el.dataset.webm;
+    v.autoplay = true;
+    v.loop = true;
+    v.muted = true;
+    v.playsInline = true;
+    v.setAttribute('playsinline','');
+    v.setAttribute('muted','');
+    v.setAttribute('aria-label', el.getAttribute('aria-label') || '');
+    v.preload = 'auto';
+    el.appendChild(v);
+    v.play().catch(function(){});
+  }
+})();
+</script>
 
 <script>
 // ===== LOADING SCREEN =====
